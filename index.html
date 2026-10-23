@@ -3,231 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnatoMaster Masterclass Elite</title>
+    <title>AnatoMaster Pro</title>
     <style>
         :root {
-            --primary: #ff007f;
-            --primary-glow: rgba(255, 0, 127, 0.6);
-            --secondary: #00f0ff;
-            --accent: #7000ff;
-            --correct: #00ff87;
-            --wrong: #ff0055;
-            --gold: #ffb700;
-            --card-bg: rgba(15, 10, 30, 0.92);
-            --border: rgba(255, 255, 255, 0.18);
-            --text-main: #ffffff;
-            --text-sub: #cbd5e1;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --primary: #f43f5e;
+            --accent: #38bdf8;
+            --correct: #10b981;
+            --wrong: #ef4444;
+            --text: #f8fafc;
+            --subtext: #94a3b8;
+            --border: #334155;
         }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
-            padding: 10px;
-            min-height: 100vh;
-            color: var(--text-main);
+            padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(-45deg, #05020a, #120524, #1f043b, #031022);
-            background-size: 400% 400%;
-            animation: gradientBG 14s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            min-height: 100vh;
         }
 
         .container {
             width: 100%;
-            max-width: 520px;
+            max-width: 480px;
         }
 
         .dash-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 5, 22, 0.9);
-            backdrop-filter: blur(16px);
+            background-color: var(--card);
             border: 1px solid var(--border);
-            padding: 12px 16px;
-            border-radius: 22px;
-            margin-bottom: 12px;
-            box-shadow: 0 0 20px rgba(112, 0, 255, 0.4);
-        }
-
-        .dash-item { font-size: 13px; font-weight: 800; }
-        .fire-streak { color: var(--gold); text-shadow: 0 0 10px var(--gold); }
-
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 26px;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 16px;
             margin-bottom: 15px;
         }
 
-        .mode-badge {
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            color: white;
-            font-size: 11px;
-            font-weight: 900;
-            text-transform: uppercase;
-            padding: 5px 12px;
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--border);
             border-radius: 20px;
-            display: inline-block;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            box-shadow: 0 0 12px var(--primary-glow);
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         h2 {
-            margin: 0 0 10px 0;
+            color: #fb7185;
+            margin-top: 0;
             font-size: 20px;
-            font-weight: 800;
-            background: linear-gradient(90deg, #ff75c3, #00f0ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* CONTENEDOR DE VIDEO EDUCATIVO */
-        .video-box {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
-            background: #000;
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            border: 1px solid var(--secondary);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
-        }
-
-        .video-box iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* FIGURAS ANATÓMICAS MEJORADAS */
-        .svg-box {
-            width: 100%;
-            height: 190px;
-            background: rgba(4, 2, 12, 0.9);
-            border-radius: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
-        }
-
-        .study-box {
-            background: rgba(12, 6, 26, 0.85);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--secondary);
-            border-radius: 14px;
-            padding: 12px;
-            margin-bottom: 10px;
-            max-height: 220px;
-            overflow-y: auto;
-        }
-
-        .study-title { font-weight: 800; color: #ff75c3; font-size: 15px; margin-bottom: 6px; }
-        .study-detail { font-size: 12px; line-height: 1.45; margin-bottom: 5px; color: var(--text-sub); }
-        .study-label { font-weight: 700; color: var(--secondary); }
-
-        .btn-grid { display: flex; flex-direction: column; gap: 10px; }
-
-        .btn-opt {
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 14px;
-            border-radius: 14px;
-            font-size: 13px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-weight: 600;
-        }
-
-        .btn-opt.correct {
-            background: linear-gradient(90deg, #00b09b, #96c93d) !important;
-            border-color: var(--correct) !important;
-            color: #000;
-            font-weight: 800;
-        }
-
-        .btn-opt.wrong {
-            background: linear-gradient(90deg, #ff0055, #ff5252) !important;
-            border-color: #ff5252 !important;
-            color: white;
-        }
-
-        .input-text {
-            width: 100%;
-            padding: 13px;
-            border-radius: 12px;
-            border: 1px solid var(--secondary);
-            background: rgba(4, 2, 12, 0.95);
-            color: white;
-            font-size: 14px;
-            margin-bottom: 12px;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        .btn-action {
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 15px;
-            border-radius: 16px;
-            font-weight: 800;
-            font-size: 15px;
-            margin-top: 12px;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--primary-glow);
         }
 
         .btn-menu {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid var(--secondary);
+            background-color: #334155;
             color: white;
-            padding: 16px;
-            border-radius: 18px;
+            border: 1px solid #475569;
+            padding: 15px;
+            border-radius: 12px;
             font-size: 15px;
-            font-weight: 800;
+            font-weight: bold;
+            width: 100%;
             text-align: left;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.2s ease;
+            margin-bottom: 10px;
         }
 
-        .btn-menu:active { transform: scale(0.97); background: rgba(0, 240, 255, 0.2); }
+        .btn-opt {
+            background-color: #334155;
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            margin-bottom: 8px;
+            display: block;
+        }
 
-        .recovery-banner {
-            background: linear-gradient(90deg, #00b09b, #96c93d);
-            color: #000;
-            padding: 10px;
+        .btn-opt.correct { background-color: var(--correct) !important; color: white; }
+        .btn-opt.wrong { background-color: var(--wrong) !important; color: white; }
+
+        .btn-action {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 14px;
             border-radius: 12px;
-            font-size: 13px;
-            font-weight: 800;
-            text-align: center;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .study-box {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            padding: 12px;
+            border-radius: 10px;
             margin-bottom: 10px;
-            display: none;
+            font-size: 13px;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -235,273 +118,113 @@
 
     <div class="container">
         <div class="dash-bar" id="dash-bar" style="display:none;">
-            <div class="dash-item" id="lives-disp">❤️ ❤️ ❤️</div>
-            <div class="dash-item fire-streak">🔥 Racha: <span id="streak-disp">0</span></div>
-            <div class="dash-item" style="color: var(--secondary);">⭐ <span id="score-disp">0</span> pts</div>
-        </div>
-
-        <div class="recovery-banner" id="rec-banner">
-            🎉 ¡Racha de 3 aciertos! ¡Recuperaste 1 Vida extra! ❤️
+            <div id="lives-disp">❤️ ❤️ ❤️</div>
+            <div style="color: #ffb703; font-weight:bold;">🔥 Racha: <span id="streak-disp">0</span></div>
+            <div style="color: var(--accent); font-weight:bold;">⭐ <span id="score-disp">0</span> pts</div>
         </div>
 
         <div class="card" id="main-card"></div>
     </div>
 
     <script>
-        // SINTETIZADOR DE AUDIO (Fanfarria alegre)
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
             if (type === 'correct') {
-                const notas = [523.25, 659.25, 783.99, 1046.50];
-                notas.forEach((freq, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.08));
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.08));
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.08) + 0.25);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + (idx * 0.08));
-                    osc.stop(audioCtx.currentTime + (idx * 0.08) + 0.25);
-                });
-            } else if (type === 'wrong') {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.25);
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(783.99, audioCtx.currentTime + 0.2);
                 gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } else {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.25);
-            } else if (type === 'powerup') {
-                const notas = [440, 554.37, 659.25, 880];
-                notas.forEach((freq, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'sine';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.06));
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.06));
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.06) + 0.2);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + (idx * 0.06));
-                    osc.stop(audioCtx.currentTime + (idx * 0.06) + 0.2);
-                });
             }
         }
 
-        // BANCO MASIVO Y PROFUNDO DE ANATOMÍA
-        const bancoMaster = {
+        const datos = {
             facial: {
-                nombre: "Anatomía Facial, Cuello & Masticación",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ", // Video ilustrativo integrando referencia de clase
+                titulo: "Músculos Faciales y Masticación",
                 leccion: [
-                    {
-                        nombre: "Masetero & Temporal (Masticación)",
-                        ubicacion: "Masetero (arco cigomático a mandíbula); Temporal (fosa temporal del cráneo).",
-                        funcion: "Elevación mandibular potente y cierre oclusal para trituración.",
-                        palpacion: "Muerda con fuerza y palpe la rama ascendente de la mandíbula.",
-                        estetica: "Hipertrofia por bruxismo y tratamientos de perfilado mandibular."
-                    },
-                    {
-                        nombre: "Orbicular de los Ojos & Corrugador",
-                        ubicacion: "Orbicular (esfínter orbitario); Corrugador (cabeza de la ceja).",
-                        funcion: "Cierre palpebral protector y fruncido vertical del entrecejo.",
-                        palpacion: "Parpadeo apretado y contracción del entrecejo.",
-                        estetica: "Patas de gallo y líneas glabelares; principal diana de toxina botulínica."
-                    },
-                    {
-                        nombre: "Cigomático Mayor, Risorio & Bucinador",
-                        ubicacion: "Plano medio-lateral de la mejilla y comisura labial.",
-                        funcion: "Sonrisa genuina (Cigomático), estiramiento comisural (Risorio) y compresión de mejillas (Bucinador).",
-                        palpacion: "Sonrisa amplia e inflado de aire en la cavidad oral.",
-                        estetica: "Sostén del óvalo facial y prevención de flacidez en el tercio medio."
-                    },
-                    {
-                        nombre: "Esternocleidomastoideo (ECOM) & Platisma",
-                        ubicacion: "ECOM (esternón/clavícula a mastoides); Platisma (subcutáneo cervical).",
-                        funcion: "Rotación e inclinación cervical (ECOM) y tensión de la piel del cuello (Platisma).",
-                        palpacion: "Gire la cabeza lateralmente contra resistencia manual.",
-                        estetica: "Bandas platismales y vías de drenaje linfático cervical."
-                    }
+                    { nombre: "Masetero", desc: "Lateral de la mandíbula. Eleva la mandíbula con fuerza para masticar." },
+                    { nombre: "Orbicular de los Ojos", desc: "Rodea el ojo. Cierra los párpados y protege el globo ocular." },
+                    { nombre: "Cigomático Mayor", desc: "Va del pómulo a la comisura. Eleva la boca para sonreír." }
                 ],
                 preguntas: [
                     {
-                        tipo: "imagen",
-                        svg: `<svg width="160" height="160" viewBox="0 0 100 100">
-                            <!-- Silueta Rostro Anatómica Detallada -->
-                            <path d="M 35 15 Q 50 8 65 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 35 15 Z" stroke="#00f0ff" stroke-width="2" fill="rgba(255,255,255,0.03)"/>
-                            <!-- Órbitas y Nariz -->
-                            <ellipse cx="42" cy="38" rx="5" ry="3" stroke="#fff" stroke-width="1.5" fill="none"/>
-                            <ellipse cx="58" cy="38" rx="5" ry="3" stroke="#fff" stroke-width="1.5" fill="none"/>
-                            <path d="M 50 42 L 48 55 L 52 55 Z" fill="#fff" opacity="0.5"/>
-                            <!-- Resalte Masetero Realista -->
-                            <path d="M 58 55 C 65 55 72 65 65 75 C 60 78 55 70 58 55 Z" fill="#ff007f" stroke="#00ff87" stroke-width="2"/>
-                            <text x="35" y="95" font-size="8" fill="#00f0ff">Músculo Masetero</text>
-                        </svg>`,
-                        pregunta: "En la silueta facial, el área resaltada en fucsia sobre la mandíbula corresponde a:",
-                        opciones: ["Frontal", "Masetero", "Risorio", "Bucinador"],
+                        pregunta: "¿Qué músculo es el principal responsable de elevar la mandíbula al masticar?",
+                        opciones: ["Frontal", "Masetero", "Risorio", "Platisma"],
                         correcta: 1,
-                        explicacion: "El Masetero ocupa la zona lateral de la mandíbula ejecutando la masticación."
+                        exp: "El Masetero es el músculo principal de la masticación."
                     },
                     {
-                        tipo: "imagen",
-                        svg: `<svg width="160" height="160" viewBox="0 0 100 100">
-                            <path d="M 35 15 Q 50 8 65 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 35 15 Z" stroke="#00f0ff" stroke-width="2" fill="rgba(255,255,255,0.03)"/>
-                            <!-- Resalte ECOM en Cuello -->
-                            <path d="M 45 75 Q 52 82 58 95 L 48 95 Z" fill="#00ff87" stroke="#ff007f" stroke-width="2"/>
-                            <text x="25" y="95" font-size="7" fill="#00ff87">Región Cervical (ECOM)</text>
-                        </svg>`,
-                        pregunta: "¿Qué músculo cervical anterolateral permite la rotación de la cabeza?",
-                        opciones: ["Esternocleidomastoideo", "Trapecio", "Deltoides", "Platisma"],
+                        pregunta: "¿Qué músculo de la cara se encarga de elevar la comisura labial para sonreír?",
+                        opciones: ["Cigomático Mayor", "Orbicular de los ojos", "Temporal", "Bucinador"],
                         correcta: 0,
-                        explicacion: "El Esternocleidomastoideo (ECOM) es el rotador y flexor principal del cuello."
-                    },
-                    {
-                        tipo: "desarrollo",
-                        pregunta: "Escriba el nombre del músculo circular que rodea los ojos y permite cerrar los párpados:",
-                        pista: "Empieza por 'Orbicular de los...'",
-                        respuestaCorrecta: "orbicular de los ojos",
-                        explicacion: "El Orbicular de los Ojos es el esfínter periocular."
-                    },
-                    {
-                        tipo: "opciones",
-                        pregunta: "¿Qué músculo de la masticación se ubica en la fosa temporal del cráneo y eleva la mandíbula?",
-                        opciones: ["Temporal", "Cigomático", "Mentoniano", "Prócer"],
-                        correcta: 0,
-                        explicacion: "El músculo Temporal cubre el lateral del cráneo y asiste potentemente al masetero."
+                        exp: "El Cigomático Mayor tracciona la boca hacia arriba y afuera."
                     }
                 ]
             },
             corporal: {
-                nombre: "Anatomía Torácica, Abdominal, Espalda & Extremidades",
-                videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                titulo: "Músculos Corporales y Extremidades",
                 leccion: [
-                    {
-                        nombre: "Pectoral Mayor & Recto Abdominal",
-                        ubicacion: "Pectoral (tórax anterior); Recto abdominal (línea media anterior del tronco).",
-                        funcion: "Aducción de hombro (Pectoral) y flexión del tronco (Recto abdominal).",
-                        palpacion: "Flexión de tronco contra resistencia y press de pecho.",
-                        estetica: "Definición core, tonificación y manejo de diástasis abdominal."
-                    },
-                    {
-                        nombre: "Trapecio & Dorsal Ancho",
-                        ubicacion: "Trapecio (espalda superior/cuello); Dorsal ancho (espalda media/inferior lateral).",
-                        funcion: "Elevación y retracción escapular (Trapecio) y extensión/aducción del brazo (Dorsal).",
-                        palpacion: "Juntar los omóplatos con fuerza hacia atrás.",
-                        estetica: "Corrección postural y alivio de cargas tensionales superiores."
-                    },
-                    {
-                        nombre: "Deltoides & Bíceps / Tríceps Braquial",
-                        ubicacion: "Deltoides (hombro); Bíceps y Tríceps (brazo anterior y posterior).",
-                        funcion: "Abducción de hombro (Deltoides), flexión de codo (Bíceps) y extensión de codo (Tríceps).",
-                        palpacion: "Elevación lateral del brazo y flexión del codo.",
-                        estetica: "Estética de extremidades superiores y tonificación de brazos."
-                    },
-                    {
-                        nombre: "Glúteo Mayor & Cuádriceps Femoral",
-                        ubicacion: "Glúteo (pelvis posterior); Cuádriceps (muslo anterior).",
-                        funcion: "Extensión de cadera (Glúteo) y extensión de rodilla (Cuádriceps).",
-                        palpacion: "Sentadillas y extensión de la pierna hacia atrás.",
-                        estetica: "Reafirmación de glúteos y muslos, protocolos anticelulíticos."
-                    }
+                    { nombre: "Deltoides", desc: "Hombro. Eleva el brazo lateralmente (abducción)." },
+                    { nombre: "Recto Abdominal", desc: "Pared anterior del abdomen. Flexiona el tronco." },
+                    { nombre: "Glúteo Mayor", desc: "Cadera posterior. Extiende la pierna hacia atrás." }
                 ],
                 preguntas: [
                     {
-                        tipo: "imagen",
-                        svg: `<svg width="160" height="160" viewBox="0 0 100 100">
-                            <!-- Silueta Torso Humano -->
-                            <path d="M 38 15 L 42 22 L 20 32 L 22 85 L 78 85 L 80 32 L 58 22 L 62 15 Z" stroke="#00f0ff" stroke-width="2" fill="rgba(255,255,255,0.03)"/>
-                            <!-- Resalte Pectoral Mayor -->
-                            <path d="M 30 35 Q 50 32 70 35 L 65 52 Q 50 55 35 52 Z" fill="#ff007f" stroke="#00ff87" stroke-width="2"/>
-                            <text x="25" y="95" font-size="7" fill="#ff75c3">Pectoral Mayor</text>
-                        </svg>`,
-                        pregunta: "En la silueta del torso anterior, el músculo destacado en el pecho es:",
-                        opciones: ["Pectoral Mayor", "Recto Abdominal", "Trapecio", "Deltoides"],
-                        correcta: 0,
-                        explicacion: "El Pectoral Mayor ocupa la parte anterior y superior del tórax."
+                        pregunta: "Al levantar el brazo hacia los lados, ¿qué músculo del hombro realiza el movimiento?",
+                        opciones: ["Bíceps", "Deltoides", "Trapecio", "Pectoral"],
+                        correcta: 1,
+                        exp: "El Deltoides es el abductor principal del hombro."
                     },
                     {
-                        tipo: "imagen",
-                        svg: `<svg width="160" height="160" viewBox="0 0 100 100">
-                            <path d="M 38 15 L 42 22 L 20 32 L 22 85 L 78 85 L 80 32 L 58 22 L 62 15 Z" stroke="#00f0ff" stroke-width="2" fill="rgba(255,255,255,0.03)"/>
-                            <!-- Resalte Recto Abdominal -->
-                            <rect x="38" y="52" width="24" height="28" rx="4" fill="#00ff87" stroke="#ff007f" stroke-width="2"/>
-                            <text x="30" y="95" font-size="7" fill="#00ff87">Recto Abdominal</text>
-                        </svg>`,
-                        pregunta: "¿Qué músculo de la pared anterior abdominal flexiona el tronco hacia adelante?",
-                        opciones: ["Recto Abdominal", "Glúteo Mayor", "Tríceps", "Dorsal Ancho"],
+                        pregunta: "¿Qué músculo de la espalda alta ayuda a sostener los hombros y mover las escápulas?",
+                        opciones: ["Trapecio", "Cuádriceps", "Recto abdominal", "Glúteo"],
                         correcta: 0,
-                        explicacion: "El Recto Abdominal es el flexor principal de la columna lumbar."
-                    },
-                    {
-                        tipo: "desarrollo",
-                        pregunta: "Escriba el nombre del músculo principal que cubre la articulación del hombro y eleva el brazo lateralmente:",
-                        pista: "Empieza por 'D...'",
-                        respuestaCorrecta: "deltoides",
-                        explicacion: "El Deltoides conforma la cúpula muscular del hombro."
-                    },
-                    {
-                        tipo: "opciones",
-                        pregunta,
-                        pregunta: "¿Cuál es el músculo extensor más potente de la cadera ubicado en la región posterior de la pelvis?",
-                        opciones: ["Glúteo Mayor", "Cuádriceps", "Bíceps Femoral", "Sartorio"],
-                        correcta: 0,
-                        explicacion: "El Glúteo Mayor genera la extensión y propulsión de la cadera."
+                        exp: "El Trapecio sostiene y moviliza la cintura escapular."
                     }
                 ]
             }
         };
 
-        let regClave = 'facial';
+        let regActual = 'facial';
         let iPregunta = 0;
         let puntos = 0;
         let racha = 0;
         let vidas = 3;
         let respondido = false;
-        let preguntasFallidas = []; // Fila para recuperar preguntas fallidas
-        let modoRepasoFallidas = false;
 
         function mostrarMenu() {
             document.getElementById('dash-bar').style.display = 'none';
-            preguntasFallidas = [];
-            modoRepasoFallidas = false;
             document.getElementById('main-card').innerHTML = `
-                <div class="mode-badge">🧠 Masterclass Anatómica</div>
-                <h2>Seleccione Área de Estudio</h2>
-                <p style="font-size:13px; color:var(--text-sub); margin-bottom:18px;">Profundice con lecciones técnicas, videos y banco extendido de preguntas:</p>
-                
-                <div style="display:flex; flex-direction:column; gap:14px;">
-                    <button class="btn-menu" onclick="seleccionarRegion('facial')">
-                        <span>👤 Facial, Cuello & Masticación</span>
-                        <span style="color:var(--secondary);">➔</span>
-                    </button>
-
-                    <button class="btn-menu" onclick="seleccionarRegion('corporal')">
-                        <span>💪 Torso, Abdomen, Espalda & Extremidades</span>
-                        <span style="color:var(--secondary);">➔</span>
-                    </button>
-                </div>
+                <h2>AnatoMaster Pro 🧠</h2>
+                <p style="color: var(--subtext); font-size: 13px; margin-bottom: 15px;">Selecciona el módulo de estudio:</p>
+                <button class="btn-menu" onclick="elegirRegion('facial')">👤 Módulo Facial & Masticación</button>
+                <button class="btn-menu" onclick="elegirRegion('corporal')">💪 Módulo Corporal & Extremidades</button>
             `;
         }
 
-        function seleccionarRegion(clave) {
-            regClave = clave;
+        function elegirRegion(reg) {
+            regActual = reg;
             iPregunta = 0;
             puntos = 0;
             racha = 0;
             vidas = 3;
-            preguntasFallidas = [];
-            modoRepasoFallidas = false;
             document.getElementById('dash-bar').style.display = 'flex';
-            mostrarLeccionYVideo();
+            mostrarLeccion();
         }
 
         function actualizarDash() {
@@ -513,103 +236,58 @@
             document.getElementById('lives-disp').innerText = h;
         }
 
-        function mostrarLeccionYVideo() {
-            const mod = bancoMaster[regClave];
-            let html = `
-                <div class="mode-badge">🎬 Video & Lección Magistral</div>
-                <h2>${mod.nombre}</h2>
-                
-                <!-- Video Educativo Integrado -->
-                <div class="video-box">
-                    <iframe src="${mod.videoUrl}" allowfullscreen></iframe>
-                </div>
-                <p style="font-size:12px; color:var(--secondary); margin-bottom:12px;">💡 Revise la disección en video y las fichas técnicas antes del examen:</p>
-            `;
-
-            mod.leccion.forEach(m => {
-                html += `
-                    <div class="study-box">
-                        <div class="study-title">⚡ ${m.nombre}</div>
-                        <div class="study-detail"><span class="study-label">📍 Ubicación:</span> ${m.ubicacion}</div>
-                        <div class="study-detail"><span class="study-label">⚙️ Función:</span> ${m.funcion}</div>
-                        <div class="study-detail"><span class="study-label">🤚 Palpación:</span> ${m.palpacion}</div>
-                        <div class="study-detail"><span class="study-label">✨ Relevancia Estética/Salud:</span> ${m.estetica}</div>
-                    </div>
-                `;
+        function mostrarLeccion() {
+            const m = datos[regActual];
+            let html = `<h2>📖 Lección: ${m.titulo}</h2>`;
+            m.leccion.forEach(l => {
+                html += `<div class="study-box"><strong>🔹 ${l.nombre}</strong><br>${l.desc}</div>`;
             });
-
-            html += `<button class="btn-action" onclick="iniciarQuiz()">¡Iniciar Examen Riguroso! 🎯</button>`;
+            html += `<button class="btn-action" onclick="iniciarQuiz()">¡Iniciar Examen! 🎯</button>`;
             document.getElementById('main-card').innerHTML = html;
             actualizarDash();
         }
 
         function iniciarQuiz() {
             iPregunta = 0;
-            preguntasFallidas = [];
-            modoRepasoFallidas = false;
             cargarPregunta();
         }
 
         function cargarPregunta() {
             respondido = false;
-            let q;
-            if (!modoRepasoFallidas) {
-                q = bancoMaster[regClave].preguntas[iPregunta];
-            } else {
-                q = preguntasFallidas[iPregunta];
-            }
+            const q = datos[regActual].preguntas[iPregunta];
+            let html = `<h2>🎯 Desafío</h2><p style="font-weight:600; font-size:15px; margin-bottom:15px;">${q.pregunta}</p>`;
+            
+            q.opciones.forEach((op, idx) => {
+                html += `<button class="btn-opt" onclick="verificar(${idx}, this)">${String.fromCharCode(65+idx)}) ${op}</button>`;
+            });
 
-            let html = `<div class="mode-badge">${modoRepasoFallidas ? '🔄 Rueda de Recuperación de Fallos' : '🎯 Examen Interactivo'}</div>`;
-
-            if (q.tipo === 'imagen') {
-                html += `<svg-box class="svg-box" style="display:flex; justify-content:center; align-items:center; width:100%; height:190px; background:rgba(4,2,12,0.9); border-radius:18px; margin-bottom:15px; border:1px solid rgba(0,240,255,0.3);">${q.svg}</svg-box>`;
-            }
-
-            html += `<div style="font-size:15px; font-weight:600; margin-bottom:16px; line-height:1.45;">${q.pregunta}</div>`;
-
-            if (q.tipo === 'desarrollo') {
-                if(q.pista) html += `<div style="font-size:12px; color:var(--secondary); margin-bottom:8px;">💡 Pista: ${q.pista}</div>`;
-                html += `<input type="text" id="user-input" class="input-text" placeholder="Escriba su respuesta...">`;
-                html += `<button class="btn-action" onclick="evaluarDesarrollo()">Comprobar Respuesta ✔️</button>`;
-            } else {
-                html += `<div class="btn-grid">`;
-                q.opciones.forEach((op, idx) => {
-                    html += `<button class="btn-opt" onclick="evaluarOpcion(${idx}, this)">${String.fromCharCode(65+idx)}) ${op}</button>`;
-                });
-                html += `</div>`;
-            }
-
-            html += `<div id="feedback" style="margin-top:15px; font-size:13px; display:none; background:rgba(4,2,12,0.9); padding:14px; border-radius:12px; border:1px solid var(--border);"></div>`;
+            html += `<div id="feedback" style="margin-top:12px; font-size:13px; display:none;"></div>`;
             html += `<button class="btn-action" id="btn-next" style="display:none;" onclick="siguiente()">Siguiente ➔</button>`;
 
             document.getElementById('main-card').innerHTML = html;
             actualizarDash();
         }
 
-        function procesarResultado(esCorrecto, explicacion, qObj) {
+        function verificar(elegida, btn) {
+            if (respondido) return;
+            respondido = true;
+            const q = datos[regActual].preguntas[iPregunta];
+            const btns = document.querySelectorAll('.btn-opt');
             const fb = document.getElementById('feedback');
-            if (esCorrecto) {
-                playSound('correct');
-                racha++;
-                puntos += 100 + (racha * 20);
 
-                if (racha % 3 === 0 && vidas < 3) {
-                    vidas++;
-                    playSound('powerup');
-                    const banner = document.getElementById('rec-banner');
-                    banner.style.display = 'block';
-                    setTimeout(() => banner.style.display = 'none', 3000);
-                }
-                fb.innerHTML = `<span style="color:var(--correct); font-weight:800;">¡EXCELENTE! 🎉</span><br>${explicacion}`;
+            if (elegida === q.correcta) {
+                playSound('correct');
+                btn.classList.add('correct');
+                racha++;
+                puntos += 100;
+                fb.innerHTML = `<span style="color:var(--correct); font-weight:bold;">¡Correcto! 🎉</span><br>${q.exp}`;
             } else {
                 playSound('wrong');
+                btn.classList.add('wrong');
+                btns[q.correcta].classList.add('correct');
                 racha = 0;
                 vidas--;
-                // Guardar para recuperar más adelante si no está ya en la lista
-                if (!preguntasFallidas.includes(qObj)) {
-                    preguntasFallidas.push(qObj);
-                }
-                fb.innerHTML = `<span style="color:var(--wrong); font-weight:800;">INCORRECTO ❌ (Pregunta guardada para recuperación)</span><br>${explicacion}`;
+                fb.innerHTML = `<span style="color:var(--wrong); font-weight:bold;">Incorrecto ❌</span><br>${q.exp}`;
             }
 
             fb.style.display = 'block';
@@ -618,78 +296,27 @@
             if (vidas > 0) {
                 document.getElementById('btn-next').style.display = 'block';
             } else {
-                setTimeout(gameOver, 1200);
-            }
-        }
-
-        function evaluarOpcion(idxOpt, btn) {
-            if (respondido) return;
-            respondido = true;
-            let q = !modoRepasoFallidas ? bancoMaster[regClave].preguntas[iPregunta] : preguntasFallidas[iPregunta];
-            const btns = document.querySelectorAll('.btn-opt');
-
-            if (idxOpt === q.correcta) {
-                btn.classList.add('correct');
-                procesarResultado(true, q.explicacion, q);
-            } else {
-                btn.classList.add('wrong');
-                btns[q.correcta].classList.add('correct');
-                procesarResultado(false, q.explicacion, q);
-            }
-        }
-
-        function evaluarDesarrollo() {
-            if (respondido) return;
-            respondido = true;
-            let q = !modoRepasoFallidas ? bancoMaster[regClave].preguntas[iPregunta] : preguntasFallidas[iPregunta];
-            const val = document.getElementById('user-input').value.trim().toLowerCase();
-
-            if (val.includes(q.respuestaCorrecta)) {
-                procesarResultado(true, q.explicacion, q);
-            } else {
-                procesarResultado(false, `Respuesta correcta: <strong>${q.respuestaCorrecta}</strong>.<br>${q.explicacion}`, q);
+                setTimeout(() => {
+                    document.getElementById('main-card').innerHTML = `
+                        <h2>💔 Fin del Juego</h2>
+                        <p>Obtuviste <strong>${puntos} puntos</strong>.</p>
+                        <button class="btn-action" onclick="mostrarMenu()">Volver al Menú 🏠</button>
+                    `;
+                }, 1200);
             }
         }
 
         function siguiente() {
             iPregunta++;
-            let maxPreguntas = !modoRepasoFallidas ? bancoMaster[regClave].preguntas.length : preguntasFallidas.length;
-
-            if (iPregunta < maxPreguntas) {
+            if (iPregunta < datos[regActual].preguntas.length) {
                 cargarPregunta();
             } else {
-                // Si terminamos las normales y hay fallidas pendientes, entramos en modo recuperación de fallos
-                if (!modoRepasoFallidas && preguntasFallidas.length > 0) {
-                    modoRepasoFallidas = true;
-                    iPregunta = 0;
-                    alert("🔄 ¡Fase de Recuperación! Repasemos las preguntas que falló para asegurar su aprendizaje.");
-                    cargarPregunta();
-                } else {
-                    victoria();
-                }
+                document.getElementById('main-card').innerHTML = `
+                    <h2>🏆 ¡Módulo Superado!</h2>
+                    <p>Puntaje final: <strong>${puntos} pts</strong></p>
+                    <button class="btn-action" onclick="mostrarMenu()">Volver al Menú 🏠</button>
+                `;
             }
-        }
-
-        function gameOver() {
-            document.getElementById('main-card').innerHTML = `
-                <div style="text-align:center;">
-                    <h2 style="color:var(--wrong);">💔 ¡AGOTÓ SUS VIDAS!</h2>
-                    <p style="font-size:14px;">Puntaje obtenido: <strong>${puntos} pts</strong></p>
-                    <button class="btn-action" onclick="mostrarMenu()">Volver al Menú Principal 🏠</button>
-                </div>
-            `;
-        }
-
-        function victoria() {
-            playSound('powerup');
-            document.getElementById('main-card').innerHTML = `
-                <div style="text-align:center;">
-                    <h2 style="color:var(--correct);">🏆 ¡MASTERCLASS COMPLETADA!</h2>
-                    <p style="font-size:15px;">Puntaje Final: <strong>${puntos} pts</strong></p>
-                    <p style="font-size:13px; color:#e0f7fa;">Ha superado con éxito las lecciones, videos y la ronda de recuperación de fallos.</p>
-                    <button class="btn-action" onclick="mostrarMenu()">Volver al Menú Principal 🏠</button>
-                </div>
-            `;
         }
 
         document.addEventListener('DOMContentLoaded', mostrarMenu);
