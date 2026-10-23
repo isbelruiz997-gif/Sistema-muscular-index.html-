@@ -3,317 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnatoMaster Pro - Sistema Muscular</title>
+    <title>Desafío AnatomicPro - Estudio de Músculos</title>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent: #e11d48;
-            --accent-hover: #be123c;
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --primary: #f43f5e;
+            --primary-hover: #e11d48;
+            --correct: #10b981;
+            --wrong: #ef4444;
+            --text: #f8fafc;
+            --subtext: #94a3b8;
             --border: #334155;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
             margin: 0;
             padding: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
         }
 
         header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         h1 {
             color: #fb7185;
             margin: 0 0 5px 0;
-            font-size: 24px;
+            font-size: 22px;
         }
 
-        p.subtitle {
-            color: var(--text-sub);
-            font-size: 13px;
-            margin: 0;
-        }
-
-        .zones-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 15px;
-            max-width: 500px;
-        }
-
-        .btn-zone {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 8px;
+        .score-board {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 14px;
             font-weight: bold;
-            font-size: 13px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .btn-zone:active, .btn-zone.active {
-            background-color: var(--accent-hover);
-            box-shadow: 0 0 8px rgba(225, 29, 72, 0.5);
+            color: #38bdf8;
+            margin-top: 5px;
         }
 
         .card {
-            background-color: var(--card-bg);
+            background-color: var(--card);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 18px;
-            width: 100%;
-            max-width: 480px;
-            box-sizing: border-box;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
         }
 
-        .muscle-selector {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-bottom: 15px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .btn-muscle {
+        .category-badge {
             background-color: #334155;
-            color: #e2e8f0;
-            border: 1px solid #475569;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
-        .btn-muscle.active {
-            background-color: #f43f5e;
-            color: white;
-            border-color: #fb7185;
-        }
-
-        .info-box h2 {
             color: #fda4af;
-            margin: 0 0 10px 0;
-            font-size: 18px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-bottom: 12px;
         }
 
-        .info-item {
-            margin-bottom: 10px;
+        .question-text {
+            font-size: 16px;
+            line-height: 1.5;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: #f1f5f9;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn-option {
+            background-color: #334155;
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-option:active {
+            transform: scale(0.98);
+        }
+
+        .btn-option.correct {
+            background-color: var(--correct) !important;
+            border-color: #34d399 !important;
+            color: white;
+        }
+
+        .btn-option.wrong {
+            background-color: var(--wrong) !important;
+            border-color: #f87171 !important;
+            color: white;
+        }
+
+        .explanation-box {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 10px;
+            background-color: #0f172a;
+            border: 1px solid var(--border);
             font-size: 13px;
             line-height: 1.4;
+            display: none;
         }
 
-        .info-label {
+        .explanation-title {
             font-weight: bold;
             color: #38bdf8;
-            display: block;
-            margin-bottom: 2px;
+            margin-bottom: 5px;
         }
 
-        .badge-estetica {
-            background-color: #831843;
-            color: #fbcfe8;
-            border: 1px solid #9d174d;
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-top: 10px;
-            font-size: 12px;
+        .btn-next {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 15px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .btn-next:hover {
+            background-color: var(--primary-hover);
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>AnatoMaster Pro</h1>
-        <p class="subtitle">Guía Interactiva de Anatomía para Cosmiatría</p>
-    </header>
+    <div class="container">
+        <header>
+            <h1>🧠 AnatomiQuiz Muscular</h1>
+            <div class="score-board">Puntos: <span id="score">0</span> / <span id="total-q">0</span></div>
+        </header>
 
-    <!-- Botones de Regiones Anatómicas -->
-    <div class="zones-container">
-        <button class="btn-zone" onclick="seleccionarZona('cara', this)">Facial</button>
-        <button class="btn-zone" onclick="seleccionarZona('cuello', this)">Cuello & Escote</button>
-        <button class="btn-zone" onclick="seleccionarZona('torso', this)">Abdomen & Tórax</button>
-        <button class="btn-zone" onclick="seleccionarZona('espalda', this)">Espalda</button>
-        <button class="btn-zone" onclick="seleccionarZona('extremidades', this)">Brazos & Piernas</button>
-    </div>
+        <div class="card" id="quiz-card">
+            <span class="category-badge" id="badge-cat">Cargando...</span>
+            <div class="question-text" id="q-text">Cargando pregunta...</div>
 
-    <!-- Tarjeta Principal de Información -->
-    <div class="card">
-        <div id="muscle-buttons" class="muscle-selector">
-            <span style="color: var(--text-sub); font-size: 12px;">Selecciona una región arriba</span>
-        </div>
+            <div class="options-grid" id="options-container"></div>
 
-        <div class="info-box">
-            <h2 id="m-nombre">¡Bienvenida!</h2>
-            
-            <div id="m-contenido">
-                <p style="color: var(--text-sub); font-size: 13px;">
-                    Haz clic en una región anatómica y elige un músculo para revisar su función clínica, ubicación y relevancia en tratamientos estéticos.
-                </p>
+            <div class="explanation-box" id="explanation">
+                <div class="explanation-title" id="exp-title">Explicación Anatómica:</div>
+                <div id="exp-text"></div>
             </div>
+
+            <button class="btn-next" id="btn-next" onclick="siguientePregunta()">Siguiente Pregunta ➔</button>
         </div>
     </div>
 
     <script>
-        const baseDatos = {
-            cara: [
-                {
-                    nombre: "Frontal",
-                    accion: "Eleva las cejas y arruga la frente transversalmente.",
-                    ubicacion: "Región anterior del cráneo, zona frontal.",
-                    estetica: "Líneas de expresión horizontales. Zona clave para toxina botulínica y masajes tensores faciales."
-                },
-                {
-                    nombre: "Orbicular de los Ojos",
-                    accion: "Cierra los párpados y ayuda al parpadeo.",
-                    ubicacion: "Alrededor de las órbitas oculares.",
-                    estetica: "Formación de 'patas de gallo'. Tratamiento con drenaje linfático periocular y aparatología suave."
-                },
-                {
-                    nombre: "Corrugador del Supercilio",
-                    accion: "Atrae la ceja hacia adentro y abajo (arruga el ceño).",
-                    ubicacion: "Sobre el arco superciliar, profundo al frontal.",
-                    estetica: "Líneas del entrecejo. Tratamiento habitual con relajantes musculares (Botox)."
-                },
-                {
-                    nombre: "Cigomático Mayor",
-                    accion: "Tracciona la comisura labial hacia arriba y afuera (sonrisa).",
-                    ubicacion: "Desde el hueso cigomático hasta la comisura labial.",
-                    estetica: "Elevación de los pómulos. Masaje mdf / maderoterapia facial para definir el óvalo facial."
-                },
-                {
-                    nombre: "Masetero",
-                    accion: "Potente elevador de la mandíbula (masticación).",
-                    ubicacion: "Lateral de la mandíbula.",
-                    estetica: "Bruxismo e hipertrofia mandibular. Masajes descontracturantes faciales y perfilado."
-                }
-            ],
-            cuello: [
-                {
-                    nombre: "Platisma",
-                    accion: "Tensa la piel del cuello y desplaza hacia abajo la comisura labial.",
-                    ubicacion: "Músculo subcutáneo ancho en la zona anterior del cuello.",
-                    estetica: "Bandas platismales, flacidez del cuello ('cuello de pavo'). Relevante en radiofrecuencia corporal/facial."
-                },
-                {
-                    nombre: "Esternocleidomastoideo (ECOM)",
-                    accion: "Rotación e inclinación de la cabeza; flexión cervical.",
-                    ubicacion: "Zona anterolateral del cuello.",
-                    estetica: "Zona de paso para drenaje linfático manual (cuello) y masajes descontracturantes de cuello y trapecio."
-                }
-            ],
-            torso: [
-                {
-                    nombre: "Recto Abdominal",
-                    accion: "Flexión del tronco y compresión de vísceras.",
-                    ubicacion: "Pared anterior del abdomen a lo largo de la línea media.",
-                    estetica: "Definición abdominal. Tratamiento con electroestimulación (ondas rusas/cuadradas) y diástasis abdominal."
-                },
-                {
-                    nombre: "Oblicuo Externo",
-                    accion: "Flexión lateral y rotación del tronco.",
-                    ubicacion: "Pared anterolateral del abdomen.",
-                    estetica: "Moldeo de la cintura. Trabajo con maderoterapia, masajes reductores y cavitación."
-                },
-                {
-                    nombre: "Pectoral Mayor",
-                    accion: "Aducción y rotación interna del brazo.",
-                    ubicacion: "Parte anterior y superior del tórax.",
-                    estetica: "Reafirmación del busto y postura del escote."
-                }
-            ],
-            espalda: [
-                {
-                    nombre: "Trapecio",
-                    accion: "Eleva, retrae y rota la escápula. Extensión de cabeza.",
-                    ubicacion: "Zona posterior del cuello y parte superior de la espalda.",
-                    estetica: "Alivio de tensiones posturales, masajes relajantes e impacto en la postura del cuello y hombros."
-                },
-                {
-                    nombre: "Dorsal Ancho",
-                    accion: "Extensión, aducción y rotación interna del brazo.",
-                    ubicacion: "Parte inferior y media de la espalda.",
-                    estetica: "Moldeo de la silueta posterior ('espalda en V') y masajes descontracturantes."
-                }
-            ],
-            extremidades: [
-                {
-                    nombre: "Glúteo Mayor",
-                    accion: "Extensión y rotación lateral de la cadera.",
-                    ubicacion: "Región glútea posterior.",
-                    estetica: "Levantamiento y tonificación de glúteos. Protocolos con copas de succión, electroestimulación y ejercicios."
-                },
-                {
-                    nombre: "Cuádriceps Femoral",
-                    accion: "Extensión de la rodilla y flexión de cadera.",
-                    ubicacion: "Parte anterior del muslo.",
-                    estetica: "Firmeza en muslos, tratamiento de flacidez muscular y mejora del retorno venoso/linfático."
-                }
-            ]
-        };
+        const preguntas = [
+            {
+                categoria: "Anatomía Facial",
+                pregunta: "Si arrugas fuertemente el ceño hacia adentro mostrando molestia o concentración, ¿qué músculo sientes contrayéndose justo encima de las cejas?",
+                opciones: [
+                    "Corrugador del supercilio",
+                    "Orbicular de los ojos",
+                    "Masetero",
+                    "Cigomático mayor"
+                ],
+                correcta: 0,
+                ubicacion: "Ubicación: Sobre el arco superciliar, profundo al músculo frontal.",
+                funcion: "Función: Atrae la ceja hacia adentro y abajo, produciendo las arrugas verticales del entrecejo."
+            },
+            {
+                categoria: "Músculos Corporales",
+                pregunta: "Al levantar el brazo lateralmente alejándolo del cuerpo (abducción del hombro), ¿qué músculo principal sientes trabajando en la parte superior del hombro?",
+                opciones: [
+                    "Pectoral mayor",
+                    "Deltoides",
+                    "Bíceps braquial",
+                    "Dorsal ancho"
+                ],
+                correcta: 1,
+                ubicacion: "Ubicación: Cubre la articulación del hombro en forma de semi-cono.",
+                funcion: "Función: Levanta el brazo hacia los lados (abducción), adelante y atrás."
+            },
+            {
+                categoria: "Anatomía Facial & Masticación",
+                pregunta: "Aprieta fuertemente los dientes y toca los laterales de tu mandíbula. Sentirás un músculo duro y potente. ¿Cuál es?",
+                opciones: [
+                    "Platisma",
+                    "Orbicular de los labios",
+                    "Masetero",
+                    "Risorio"
+                ],
+                correcta: 2,
+                ubicacion: "Ubicación: Lateral de la cara, va desde el arco cigomático hasta la mandíbula.",
+                funcion: "Función: Eleva la mandíbula con fuerza para la masticación."
+            },
+            {
+                categoria: "Tórax y Abdomen",
+                pregunta: "Cuando haces abdominales llevando el pecho hacia las rodillas, ¿qué músculo largo de la pared anterior del abdomen se encarga de flexionar el tronco?",
+                opciones: [
+                    "Recto abdominal",
+                    "Trapecio",
+                    "Glúteo mayor",
+                    "Platisma"
+                ],
+                correcta: 0,
+                ubicacion: "Ubicación: Pared anterior del abdomen, dividido por la línea alba.",
+                funcion: "Función: Flexiona la columna vertebral y comprime la cavidad abdominal."
+            },
+            {
+                categoria: "Cuello y Escote",
+                pregunta: "Al girar la cabeza firmemente hacia la derecha, en el lado izquierdo del cuello sobresale un cordón muscular muy marcado. ¿Cómo se llama?",
+                opciones: [
+                    "Deltoides",
+                    "Esternocleidomastoideo (ECOM)",
+                    "Frontal",
+                    "Sartorio"
+                ],
+                correcta: 1,
+                ubicacion: "Ubicación: Zona anterolateral del cuello, desde el esternón y clavícula hasta la apófisis mastoides.",
+                funcion: "Función: Rotación e inclinación de la cabeza, y flexión del cuello."
+            },
+            {
+                categoria: "Extremidades Inferiores",
+                pregunta: "Si te pones de pie y extiendes la pierna hacia atrás con fuerza o subes escalones, ¿qué músculo grande y potente en la zona posterior de la cadera se activa?",
+                opciones: [
+                    "Cuádriceps",
+                    "Glúteo mayor",
+                    "Gastrocnemio (Gemelo)",
+                    "Trapecio"
+                ],
+                correcta: 1,
+                ubicacion: "Ubicación: Región posterior de la pelvis/cadera.",
+                funcion: "Función: Principal extensor y rotador externo de la cadera."
+            }
+        ];
 
-        function seleccionarZona(zona, elemento) {
-            // Actualizar clase activa en botones de zona
-            document.querySelectorAll('.btn-zone').forEach(btn => btn.classList.remove('active'));
-            if(elemento) elemento.classList.add('active');
+        let indiceActual = 0;
+        let puntos = 0;
+        let respondido = false;
 
-            const contenedor = document.getElementById('muscle-buttons');
-            contenedor.innerHTML = '';
+        function cargarPregunta() {
+            respondido = false;
+            const q = preguntas[indiceActual];
 
-            const musculos = baseDatos[zona];
+            document.getElementById('badge-cat').innerText = q.categoria;
+            document.getElementById('q-text').innerText = q.pregunta;
+            document.getElementById('total-q').innerText = preguntas.length;
+            document.getElementById('score').innerText = puntos;
 
-            musculos.forEach((m, idx) => {
+            document.getElementById('explanation').style.display = 'none';
+            document.getElementById('btn-next').style.display = 'none';
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.opciones.forEach((op, index) => {
                 const btn = document.createElement('button');
-                btn.className = 'btn-muscle';
-                btn.innerText = m.nombre;
-                btn.onclick = () => mostrarDetalle(m, btn);
-                contenedor.appendChild(btn);
-
-                // Cargar el primero automáticamente
-                if(idx === 0) btn.click();
+                btn.className = 'btn-option';
+                btn.innerText = `${String.fromCharCode(65 + index)}) ${op}`;
+                btn.onclick = () => verificarRespuesta(index, btn);
+                container.appendChild(btn);
             });
         }
 
-        function mostrarDetalle(m, btnElemento) {
-            document.querySelectorAll('.btn-muscle').forEach(b => b.classList.remove('active'));
-            if(btnElemento) btnElemento.classList.add('active');
+        function verificarRespuesta(seleccionada, btnElegido) {
+            if (respondido) return;
+            respondido = true;
 
-            document.getElementById('m-nombre').innerText = m.nombre;
-            document.getElementById('m-contenido').innerHTML = `
-                <div class="info-item">
-                    <span class="info-label">📍 Ubicación:</span>
-                    ${m.ubicacion}
-                </div>
-                <div class="info-item">
-                    <span class="info-label">⚙️ Acción Anatómica:</span>
-                    ${m.accion}
-                </div>
-                <div class="badge-estetica">
-                    <strong>✨ Relevancia en Estética / Cosmiatría:</strong><br>
-                    ${m.estetica}
+            const q = preguntas[indiceActual];
+            const botones = document.querySelectorAll('.btn-option');
+
+            if (seleccionada === q.correcta) {
+                btnElegido.classList.add('correct');
+                puntos++;
+                document.getElementById('score').innerText = puntos;
+            } else {
+                btnElegido.classList.add('wrong');
+                botones[q.correcta].classList.add('correct');
+            }
+
+            // Mostrar explicación explicativa
+            document.getElementById('exp-text').innerHTML = `
+                <strong>${q.opciones[q.correcta]}</strong><br>
+                📍 <em>${q.ubicacion}</em><br>
+                ⚙️ <em>${q.funcion}</em>
+            `;
+            document.getElementById('explanation').style.display = 'block';
+            document.getElementById('btn-next').style.display = 'block';
+        }
+
+        function siguientePregunta() {
+            indiceActual++;
+            if (indiceActual < preguntas.length) {
+                cargarPregunta();
+            } else {
+                mostrarResultadoFinal();
+            }
+        }
+
+        function mostrarResultadoFinal() {
+            const card = document.getElementById('quiz-card');
+            card.innerHTML = `
+                <div style="text-align: center; padding: 10px;">
+                    <h2 style="color: #fb7185; margin-bottom: 10px;">🎉 ¡Cuestionario Completado!</h2>
+                    <p style="font-size: 16px;">Obtuviste <strong>${puntos}</strong> de <strong>${preguntas.length}</strong> aciertos.</p>
+                    <p style="color: var(--subtext); font-size: 13px;">${puntos === preguntas.length ? '¡Excelente! Dominas perfectamente la ubicación y función muscular.' : '¡Buen intento! Puedes volver a repasar para afianzar tus conocimientos.'}</p>
+                    <button class="btn-next" style="display:block;" onclick="location.reload()">Reiniciar Test 🔄</button>
                 </div>
             `;
         }
 
-        // Cargar zona facial al inicio
-        document.addEventListener('DOMContentLoaded', () => {
-            const primerBoton = document.querySelector('.btn-zone');
-            if(primerBoton) primerBoton.click();
-        });
+        document.addEventListener('DOMContentLoaded', cargarPregunta);
     </script>
 </body>
 </html>
