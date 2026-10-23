@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AnatoMaster Ultra - Juego Muscular</title>
+    <title>AnatoMaster Pro - Sistema Muscular</title>
     <style>
         :root {
             --primary: #ff007f;
@@ -13,7 +13,7 @@
             --correct: #00ff87;
             --wrong: #ff0055;
             --gold: #ffb700;
-            --card-bg: rgba(18, 12, 38, 0.85);
+            --card-bg: rgba(18, 12, 38, 0.88);
             --border: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
             --text-sub: #d1d5db;
@@ -44,7 +44,6 @@
             max-width: 500px;
         }
 
-        /* BARRA DASHBOARD DE NEÓN */
         .dash-bar {
             display: flex;
             justify-content: space-between;
@@ -58,17 +57,9 @@
             box-shadow: 0 0 20px rgba(112, 0, 255, 0.3);
         }
 
-        .dash-item {
-            font-size: 14px;
-            font-weight: 800;
-        }
+        .dash-item { font-size: 14px; font-weight: 800; }
+        .fire-streak { color: var(--gold); text-shadow: 0 0 12px var(--gold); }
 
-        .fire-streak {
-            color: var(--gold);
-            text-shadow: 0 0 12px var(--gold);
-        }
-
-        /* TARJETA GLASSMORPHISM */
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -102,22 +93,22 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* ILUSTRACIÓN ANATÓMICA SVG CON RESALTE DE MÚSCULO */
+        /* ILUSTRACIONES ANATÓMICAS ANATÓMICAMENTE RECONOCIBLES */
         .svg-box {
             width: 100%;
-            height: 150px;
-            background: rgba(5, 2, 15, 0.7);
+            height: 180px;
+            background: rgba(5, 2, 15, 0.85);
             border-radius: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 15px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.25);
+            box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.9);
         }
 
         .study-box {
-            background: rgba(10, 6, 26, 0.75);
+            background: rgba(10, 6, 26, 0.8);
             border: 1px solid var(--border);
             border-left: 4px solid var(--secondary);
             border-radius: 16px;
@@ -125,31 +116,11 @@
             margin-bottom: 12px;
         }
 
-        .study-title {
-            font-weight: 800;
-            color: #ff75c3;
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
+        .study-title { font-weight: 800; color: #ff75c3; font-size: 16px; margin-bottom: 8px; }
+        .study-detail { font-size: 13px; line-height: 1.5; margin-bottom: 6px; color: var(--text-sub); }
+        .study-label { font-weight: 700; color: var(--secondary); }
 
-        .study-detail {
-            font-size: 13px;
-            line-height: 1.5;
-            margin-bottom: 6px;
-            color: var(--text-sub);
-        }
-
-        .study-label {
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        /* BOTONES DE SELECCIÓN Y INPUT DE DESARROLLO */
-        .btn-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .btn-grid { display: flex; flex-direction: column; gap: 12px; }
 
         .btn-opt {
             background: rgba(255, 255, 255, 0.06);
@@ -163,8 +134,6 @@
             transition: all 0.25s ease;
             font-weight: 600;
         }
-
-        .btn-opt:active { transform: scale(0.96); }
 
         .btn-opt.correct {
             background: linear-gradient(90deg, #00b09b, #96c93d) !important;
@@ -184,7 +153,7 @@
             padding: 14px;
             border-radius: 14px;
             border: 1px solid var(--secondary);
-            background: rgba(5, 2, 15, 0.8);
+            background: rgba(5, 2, 15, 0.9);
             color: white;
             font-size: 15px;
             margin-bottom: 12px;
@@ -206,6 +175,24 @@
             box-shadow: 0 0 25px var(--primary-glow);
         }
 
+        .btn-menu {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--secondary);
+            color: white;
+            padding: 18px;
+            border-radius: 20px;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-menu:active { transform: scale(0.97); background: rgba(0, 240, 255, 0.2); }
+
         .recovery-banner {
             background: linear-gradient(90deg, #00b09b, #96c93d);
             color: #000;
@@ -223,7 +210,7 @@
 
     <div class="container">
         <!-- Dashboard Gamificado -->
-        <div class="dash-bar">
+        <div class="dash-bar" id="dash-bar" style="display:none;">
             <div class="dash-item" id="lives-disp">❤️ ❤️ ❤️</div>
             <div class="dash-item fire-streak">🔥 Racha: <span id="streak-disp">0</span></div>
             <div class="dash-item" style="color: var(--secondary);">⭐ <span id="score-disp">0</span> pts</div>
@@ -238,133 +225,252 @@
     </div>
 
     <script>
-        // SINTETIZADOR DE AUDIO
+        // --- SINTETIZADOR DE AUDIO MÁS ALEGRE Y TRIUNFAL ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
+            
             if (type === 'correct') {
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(659.25, audioCtx.currentTime + 0.15);
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.3);
+                // Arpegio alegre tipo "Fanfarria de Victoria" (Do - Mi - Sol - Do alto)
+                const notas = [523.25, 659.25, 783.99, 1046.50];
+                notas.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.08));
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.08));
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.08) + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + (idx * 0.08));
+                    osc.stop(audioCtx.currentTime + (idx * 0.08) + 0.25);
+                });
             } else if (type === 'wrong') {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
                 osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(180, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.2);
+                osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.25);
                 gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.25);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.25);
             } else if (type === 'powerup') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3);
-                gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.35);
+                const notas = [440, 554.37, 659.25, 880];
+                notas.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.06));
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.06));
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.06) + 0.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + (idx * 0.06));
+                    osc.stop(audioCtx.currentTime + (idx * 0.06) + 0.2);
+                });
             }
         }
 
-        // BASE DE DATOS EXTENSA Y VARIADA CON MÚLTIPLES PREGUNTAS E ILUSTRACIONES
-        const modulos = [
-            {
-                zona: "Músculos Faciales y Masticación",
+        // --- BANCO DE DATOS PROFUNDO DIVIDIDO POR REGIONES ---
+        const bancoRegiones = {
+            facial: {
+                nombre: "Anatomía Facial & Masticación",
                 leccion: [
                     {
-                        nombre: "Masetero",
-                        ubicacion: "Lateral posterior de la mandíbula, desde el arco cigomático hasta el ángulo mandibular.",
-                        funcion: "Potente elevador de la mandíbula en la masticación y cierre bucal.",
-                        palpacion: "Aprieta las muelas con fuerza y siente la masa rígida abultarse en tus mejillas.",
-                        estetica: "Zona clave de bruxismo y masajes descontracturantes faciales."
+                        nombre: "Masetero & Temporal",
+                        ubicacion: "Masetero en la rama mandibular; Temporal en la fosa temporal lateral del cráneo.",
+                        funcion: "Potentes elevadores mandibulares responsables del cierre bucal y masticación.",
+                        palpacion: "Aprieta las muelas firmemente: sentirás ambos músculos abultarse.",
+                        estetica: "Músculos clave en cuadros de bruxismo y tensión mandibular."
                     },
                     {
-                        nombre: "Frontal",
-                        ubicacion: "Parte anterior del cráneo, zona de la frente.",
-                        funcion: "Eleva las cejas y crea arrugas horizontales en la frente.",
-                        palpacion: "Mira hacia arriba sorprendida y siente cómo trabaja tu frente.",
-                        estetica: "Líneas de expresión horizontales tratadas con relajantes musculares."
+                        nombre: "Cigomático Mayor & Risorio",
+                        ubicacion: "Desde el hueso cigomático (pómulo) y fascia parotídea hasta la comisura labial.",
+                        funcion: "Traccionan la comisura labial hacia arriba y afuera (sonrisa y risa).",
+                        palpacion: "Sonríe exageradamente marcando las mejillas.",
+                        estetica: "Definición del óvalo facial y tono de las mejillas."
+                    },
+                    {
+                        nombre: "Orbicular de los Ojos & Corrugador",
+                        ubicacion: "Orbicular rodea la órbita ocular; Corrugador en la zona medial del arco superciliar.",
+                        funcion: "Cierre palpebral (parpadeo) y fruncido del entrecejo.",
+                        palpacion: "Cierra fuertemente los ojos o frunce el ceño.",
+                        estetica: "Tratamiento de 'patas de gallo' y líneas del entrecejo con toxina botulínica."
+                    },
+                    {
+                        nombre: "Bucinador & Orbicular de los Labios",
+                        ubicacion: "Bucinador en la pared profunda del cachete; Orbicular rodea la boca.",
+                        funcion: "Comprime las mejillas al soplar/masticar y proyecta/cierra los labios.",
+                        palpacion: "Infla las mejillas con aire o proyecta los labios para silbar.",
+                        estetica: "Sostén de las mejillas y tratamiento de líneas peribucales."
                     }
                 ],
                 preguntas: [
                     {
                         tipo: "imagen",
-                        svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                            <circle cx="50" cy="45" r="32" stroke="#ff007f" stroke-width="3" fill="none"/>
-                            <rect x="58" y="45" width="14" height="20" fill="#00f0ff" rx="3"/>
-                            <circle cx="40" cy="40" r="4" fill="#ffffff"/>
-                            <circle cx="60" cy="40" r="4" fill="#ffffff"/>
+                        svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                            <!-- Silueta Cara -->
+                            <path d="M 30 20 Q 50 10 70 20 Q 75 50 68 75 Q 50 92 32 75 Q 25 50 30 20 Z" stroke="#ffffff" stroke-width="2" fill="none"/>
+                            <!-- Ojos y Boca -->
+                            <circle cx="42" cy="40" r="3" fill="#ffffff"/>
+                            <circle cx="58" cy="40" r="3" fill="#ffffff"/>
+                            <path d="M 44 68 Q 50 72 56 68" stroke="#ffffff" stroke-width="2"/>
+                            <!-- Resalte Masetero -->
+                            <rect x="58" y="52" width="12" height="20" fill="#00f0ff" rx="3" stroke="#ff007f" stroke-width="1.5"/>
+                            <circle cx="64" cy="62" r="2" fill="#ff007f"/>
                         </svg>`,
-                        pregunta: "Observa la ilustración: ¿Qué músculo resaltado en azul en el lateral de la cara interviene con máxima fuerza en la masticación?",
-                        opciones: ["Frontal", "Masetero", "Orbicular de los ojos", "Bucinador"],
+                        pregunta: "Observa la silueta facial: ¿Qué músculo resaltado en azul en la parte lateral e inferior de la cara eleva la mandíbula al masticar?",
+                        opciones: ["Frontal", "Masetero", "Orbicular de los ojos", "Risorio"],
                         correcta: 1,
-                        explicacion: "El Masetero es el elevador principal de la mandíbula."
+                        explicacion: "El Masetero se ubica en el lateral posterior mandibular y ejerce la fuerza de oclusión."
+                    },
+                    {
+                        tipo: "imagen",
+                        svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                            <path d="M 30 20 Q 50 10 70 20 Q 75 50 68 75 Q 50 92 32 75 Q 25 50 30 20 Z" stroke="#ffffff" stroke-width="2" fill="none"/>
+                            <!-- Cejas y Corrugador Resaltado -->
+                            <path d="M 36 32 Q 44 32 46 35" stroke="#ff007f" stroke-width="4" fill="none"/>
+                            <path d="M 64 32 Q 56 32 54 35" stroke="#ff007f" stroke-width="4" fill="none"/>
+                            <circle cx="50" cy="35" r="3" fill="#00f0ff"/>
+                        </svg>`,
+                        pregunta: "Observa el resalte rosado en el entrecejo: ¿Qué músculo frunce el ceño hacia adentro generando líneas verticales?",
+                        opciones: ["Corrugador del supercilio", "Cigomático mayor", "Bucinador", "Temporal"],
+                        correcta: 0,
+                        explicacion: "El Corrugador atrae la ceja hacia la línea media."
                     },
                     {
                         tipo: "desarrollo",
-                        pregunta: "¿Qué músculo de la frente eleva las cejas y genera arrugas horizontales de sorpresa?",
-                        pista: "Empieza por 'F' y da nombre a la zona facial superior.",
-                        respuestaCorrecta: "frontal",
-                        explicacion: "El músculo Frontal es el elevador de las cejas y la frente."
+                        pregunta: "¿Qué músculo principal eleva la comisura labial hacia arriba y afuera para formar la sonrisa?",
+                        pista: "Proviene del hueso pómulo (Cigomático...).",
+                        respuestaCorrecta: "cigomatico",
+                        explicacion: "El Cigomático Mayor eleva la esquina de la boca al sonreír."
                     },
                     {
                         tipo: "opciones",
-                        pregunta: "Al cerrar fuertemente los párpados protegiendo el ojo, ¿qué músculo esfínter está trabajando en todo el contorno ocular?",
-                        opciones: ["Orbicular de los Ojos", "Corrugador", "Risorio", "Masetero"],
+                        pregunta: "Al inflar los cachetes con aire o sujetar el alimento contra las muelas, ¿qué músculo profundo de la mejilla actúa?",
+                        opciones: ["Bucinador", "Masetero", "Frontal", "Platisma"],
                         correcta: 0,
-                        explicacion: "El Orbicular de los Ojos rodea la órbita permitiendo el parpadeo y cierre ocular."
+                        explicacion: "El Bucinador comprime la mejilla y ayuda en la masticación y soplado."
                     }
                 ]
             },
-            {
-                zona: "Hombros, Espalda y Extremidades",
+            corporal: {
+                nombre: "Anatomía Corporal & Extremidades",
                 leccion: [
                     {
-                        nombre: "Deltoides",
-                        ubicacion: "Parte superior y lateral del hombro en forma de semi-cono.",
-                        funcion: "Abducción del brazo (elevarlo lateralmente) y estabilización de la articulación.",
-                        palpacion: "Levanta el brazo en 90° lateralmente y palpa la cúpula de tu hombro.",
-                        estetica: "Tonificación del contorno superior del brazo y hombros."
+                        nombre: "Esternocleidomastoideo (ECOM) & Platisma",
+                        ubicacion: "ECOM en la zona anterolateral del cuello; Platisma subcutáneo desde el tórax hasta la mandíbula.",
+                        funcion: "Rotación/flexión de cabeza (ECOM) y tensión de la piel del cuello/escote (Platisma).",
+                        palpacion: "Gira la cabeza lateralmente (ECOM) o tensa el cuello enseñando los dientes inferiores (Platisma).",
+                        estetica: "Flacidez del cuello (bandas platismales) y drenaje linfático cervical."
+                    },
+                    {
+                        nombre: "Deltoides & Pectoral Mayor",
+                        ubicacion: "Deltoides en la cúpula del hombro; Pectoral mayor en la pared anterior del tórax.",
+                        funcion: "Elevación lateral del brazo (Deltoides) y aducción/rotación interna del brazo (Pectoral).",
+                        palpacion: "Levanta el brazo a 90° o empuja las palmas de las manos una contra otra.",
+                        estetica: "Firmeza del busto, escote y tonificación de hombros."
+                    },
+                    {
+                        nombre: "Recto Abdominal & Transverso",
+                        ubicacion: "Recto en la pared anterior del abdomen; Transverso en la capa abdominal profunda.",
+                        funcion: "Flexión del tronco (Recto) y compresión visceral/faja natural (Transverso).",
+                        palpacion: "Realiza un abdominal o mete el ombligo firmemente hacia adentro.",
+                        estetica: "Moldeo de la cintura, diástasis abdominal y definición."
+                    },
+                    {
+                        nombre: "Trapecio & Glúteo Mayor",
+                        ubicacion: "Trapecio en la espalda superior y cuello posterior; Glúteo mayor en la región posterior de la pelvis.",
+                        funcion: "Elevación/retracción escapular (Trapecio) y extensión/rotación de cadera (Glúteo mayor).",
+                        palpacion: "Lleva los hombros hacia atrás o extiende la pierna hacia atrás.",
+                        estetica: "Alivio descontracturante de hombros y tonificación/levantamiento glúteo."
                     }
                 ],
                 preguntas: [
                     {
                         tipo: "imagen",
-                        svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                            <path d="M 30 75 L 38 35 L 50 25 L 62 35 L 70 75" stroke="#ffffff" stroke-width="3" fill="none"/>
-                            <path d="M 20 45 Q 30 30 38 35 L 30 60 Z" fill="#ff007f" stroke="#00f0ff" stroke-width="2"/>
+                        svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                            <!-- Silueta Torso y Cuello -->
+                            <path d="M 40 20 L 40 30 L 25 40 L 25 80 L 75 80 L 75 40 L 60 30 L 60 20 Z" stroke="#ffffff" stroke-width="2" fill="none"/>
+                            <!-- Banda ECOM Resaltada -->
+                            <line x1="42" y1="22" x2="56" y2="35" stroke="#00f0ff" stroke-width="5" stroke-linecap="round"/>
                         </svg>`,
-                        pregunta: "Observa la ilustración del hombro: ¿Qué músculo en forma de triángulo resaltado eleva el brazo lateralmente?",
-                        opciones: ["Bíceps", "Deltoides", "Trapecio", "Tríceps"],
+                        pregunta: "Observa la silueta del cuello: ¿Qué músculo en banda diagonal resaltado en azul gira la cabeza hacia el lado opuesto?",
+                        opciones: ["Esternocleidomastoideo", "Trapecio", "Deltoides", "Pectoral"],
+                        correcta: 0,
+                        explicacion: "El Esternocleidomastoideo (ECOM) realiza la rotación e inclinación cervical."
+                    },
+                    {
+                        tipo: "imagen",
+                        svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                            <path d="M 40 20 L 40 30 L 20 42 L 20 85 L 80 85 L 80 42 L 60 30 L 60 20 Z" stroke="#ffffff" stroke-width="2" fill="none"/>
+                            <!-- Resalte Deltoides -->
+                            <path d="M 20 42 C 20 35 30 32 35 34 L 28 55 Z" fill="#ff007f" stroke="#00f0ff" stroke-width="1.5"/>
+                        </svg>`,
+                        pregunta: "Observa el hombro resaltado: ¿Qué músculo abduce (eleva lateralmente) el brazo a 90°?",
+                        opciones: ["Bíceps", "Deltoides", "Dorsal ancho", "Glúteo mayor"],
                         correcta: 1,
-                        explicacion: "El Deltoides cubre la articulación del hombro y realiza la abducción del brazo."
+                        explicacion: "El Deltoides recubre la articulación del hombro y realiza la abducción."
                     },
                     {
                         tipo: "desarrollo",
-                        pregunta: "Escribe el nombre del músculo que forma un 'cordón' diagonal en el cuello al girar la cabeza hacia un lado:",
-                        pista: "Puedes usar la sigla ECOM o escribir Esternocleidomastoideo.",
-                        respuestaCorrecta: "esternocleidomastoideo",
-                        explicacion: "El Esternocleidomastoideo (ECOM) permite la rotación e inclinación cervical."
+                        pregunta: "Escribe el nombre del músculo abdominal profundo que actúa como 'faja anatómica' metiendo el ombligo hacia adentro:",
+                        pista: "Músculo... del abdomen.",
+                        respuestaCorrecta: "transverso",
+                        explicacion: "El Transverso del Abdomen comprime las vísceras y estabiliza la zona lumbar."
+                    },
+                    {
+                        tipo: "opciones",
+                        pregunta: "Al ponerse de pie desde una silla o subir escalones, ¿qué potente músculo extensor de la cadera se activa principalmente?",
+                        opciones: ["Glúteo Mayor", "Cuádriceps", "Trapecio", "Platisma"],
+                        correcta: 0,
+                        explicacion: "El Glúteo Mayor es el extensor más potente de la cadera."
                     }
                 ]
             }
-        ];
+        };
 
-        let iModulo = 0;
+        let regClave = 'facial';
         let iPregunta = 0;
         let puntos = 0;
         let racha = 0;
         let vidas = 3;
         let respondido = false;
+
+        function mostrarMenu() {
+            document.getElementById('dash-bar').style.display = 'none';
+            document.getElementById('main-card').innerHTML = `
+                <div class="mode-badge">🧠 AnatomiQuiz Muscular</div>
+                <h2>Selecciona la Región de Estudio</h2>
+                <p style="font-size:13px; color:var(--text-sub); margin-bottom:20px;">Elige qué área del cuerpo deseas repasar e interactuar:</p>
+                
+                <div style="display:flex; flex-direction:column; gap:14px;">
+                    <button class="btn-menu" onclick="seleccionarRegion('facial')">
+                        <span>👤 Módulo Facial & Masticación</span>
+                        <span style="color:var(--secondary);">➔</span>
+                    </button>
+
+                    <button class="btn-menu" onclick="seleccionarRegion('corporal')">
+                        <span>💪 Módulo Corporal & Extremidades</span>
+                        <span style="color:var(--secondary);">➔</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function seleccionarRegion(clave) {
+            regClave = clave;
+            iPregunta = 0;
+            puntos = 0;
+            racha = 0;
+            vidas = 3;
+            document.getElementById('dash-bar').style.display = 'flex';
+            mostrarLeccion();
+        }
 
         function actualizarDash() {
             document.getElementById('score-disp').innerText = puntos;
@@ -376,11 +482,11 @@
         }
 
         function mostrarLeccion() {
-            const mod = modulos[iModulo];
+            const mod = bancoRegiones[regClave];
             let html = `
-                <div class="mode-badge">📖 Módulo de Estudio</div>
-                <h2>${mod.zona}</h2>
-                <p style="font-size:13px; color:var(--text-sub); margin-bottom:15px;">Estudia las fichas antes de iniciar los retos interactivos:</p>
+                <div class="mode-badge">📖 Módulo de Estudio Extenso</div>
+                <h2>${mod.nombre}</h2>
+                <p style="font-size:13px; color:var(--text-sub); margin-bottom:15px;">Estudia cada ficha técnica antes de empezar los desafíos:</p>
             `;
 
             mod.leccion.forEach(m => {
@@ -389,13 +495,13 @@
                         <div class="study-title">⚡ ${m.nombre}</div>
                         <div class="study-detail"><span class="study-label">📍 Ubicación:</span> ${m.ubicacion}</div>
                         <div class="study-detail"><span class="study-label">⚙️ Función:</span> ${m.funcion}</div>
-                        <div class="study-detail"><span class="study-label">🤚 Reconocimiento:</span> ${m.palpacion}</div>
+                        <div class="study-detail"><span class="study-label">🤚 Palpación:</span> ${m.palpacion}</div>
                         <div class="study-detail"><span class="study-label">✨ Relevancia Estética/Salud:</span> ${m.estetica}</div>
                     </div>
                 `;
             });
 
-            html += `<button class="btn-action" onclick="iniciarQuiz()">¡Iniciar Desafíos! 🎯</button>`;
+            html += `<button class="btn-action" onclick="iniciarQuiz()">¡Iniciar Desafíos Prácticos! 🎯</button>`;
             document.getElementById('main-card').innerHTML = html;
             actualizarDash();
         }
@@ -407,7 +513,7 @@
 
         function cargarPregunta() {
             respondido = false;
-            const q = modulos[iModulo].preguntas[iPregunta];
+            const q = bancoRegiones[regClave].preguntas[iPregunta];
 
             let html = `<div class="mode-badge">🎯 Desafío Interactivo</div>`;
 
@@ -471,7 +577,7 @@
         function evaluarOpcion(idxOpt, btn) {
             if (respondido) return;
             respondido = true;
-            const q = modulos[iModulo].preguntas[iPregunta];
+            const q = bancoRegiones[regClave].preguntas[iPregunta];
             const btns = document.querySelectorAll('.btn-opt');
 
             if (idxOpt === q.correcta) {
@@ -488,10 +594,10 @@
             if (respondido) return;
             respondido = true;
 
-            const q = modulos[iModulo].preguntas[iPregunta];
+            const q = bancoRegiones[regClave].preguntas[iPregunta];
             const val = document.getElementById('user-input').value.trim().toLowerCase();
 
-            if (val.includes(q.respuestaCorrecta) || val.includes("ecom")) {
+            if (val.includes(q.respuestaCorrecta)) {
                 procesarResultado(true, q.explicacion);
             } else {
                 procesarResultado(false, `La respuesta correcta era: <strong>${q.respuestaCorrecta}</strong>.<br>${q.explicacion}`);
@@ -500,15 +606,10 @@
 
         function siguiente() {
             iPregunta++;
-            if (iPregunta < modulos[iModulo].preguntas.length) {
+            if (iPregunta < bancoRegiones[regClave].preguntas.length) {
                 cargarPregunta();
             } else {
-                iModulo++;
-                if (iModulo < modulos.length) {
-                    mostrarLeccion();
-                } else {
-                    victoria();
-                }
+                victoria();
             }
         }
 
@@ -517,8 +618,7 @@
                 <div style="text-align:center;">
                     <h2 style="color:var(--wrong);">💔 ¡SIN VIDAS DISPONIBLES!</h2>
                     <p style="font-size:15px;">Puntaje acumulado: <strong>${puntos} pts</strong></p>
-                    <p style="font-size:13px; color:var(--text-sub);">Revisa las fichas de lección para consolidar tu aprendizaje.</p>
-                    <button class="btn-action" onclick="location.reload()">Reintentar 🔄</button>
+                    <button class="btn-action" onclick="mostrarMenu()">Volver al Menú Principal 🏠</button>
                 </div>
             `;
         }
@@ -527,15 +627,15 @@
             playSound('powerup');
             document.getElementById('main-card').innerHTML = `
                 <div style="text-align:center;">
-                    <h2 style="color:var(--correct);">🏆 ¡DESAFÍO COMPLETADO!</h2>
+                    <h2 style="color:var(--correct);">🏆 ¡MÓDULO COMPLETADO!</h2>
                     <p style="font-size:16px;">Puntaje Final: <strong>${puntos} pts</strong></p>
-                    <p style="font-size:13px; color:#e0f7fa;">Has dominado las preguntas visuales, de desarrollo y de selección múltiple.</p>
-                    <button class="btn-action" onclick="location.reload()">Volver a Jugar 🔄</button>
+                    <p style="font-size:13px; color:#e0f7fa;">Has demostrado un excelente dominio anatómico de esta región.</p>
+                    <button class="btn-action" onclick="mostrarMenu()">Volver al Menú Principal 🏠</button>
                 </div>
             `;
         }
 
-        document.addEventListener('DOMContentLoaded', mostrarLeccion);
+        document.addEventListener('DOMContentLoaded', mostrarMenu);
     </script>
 </body>
 </html>
