@@ -474,7 +474,7 @@
             }
         }
 
-        // BASE DE DATOS COMPLETA: CARA, CUELLO, ABDOMEN, BRAZOS Y PIERNAS
+        // BASE DE DATOS CON SILUETAS ANATÓMICAS REALES Y RECONOCIBLES (SVGs Vectoriales Mejorados)
         const baseAnatomica = {
             cara: [
                 {
@@ -483,7 +483,15 @@
                     accion: "Potente elevación mandibular para la masticación.",
                     palpacion: "Aprieta las muelas y palpa la masa rígida en el ángulo mandibular.",
                     aplicacion: "Tensión por bruxismo. Masaje descontracturante facial y drenaje hacia ganglios submandibulares.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="58" y="50" width="14" height="22" rx="3" fill="#ff007f" stroke="#00ff87" stroke-width="1.5"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <!-- Silueta de la Cabeza Humana -->
+                        <path d="M 35 15 C 20 20 20 60 35 80 C 40 88 50 90 55 90 C 65 90 75 80 75 60 C 75 40 70 20 55 12 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Mandíbula y labio -->
+                        <path d="M 40 65 Q 50 78 60 65" stroke="#00f0ff" stroke-width="1" fill="none"/>
+                        <!-- Músculo Masetero Resaltado en Neón -->
+                        <polygon points="56,52 70,55 67,73 53,68" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <circle cx="43" cy="40" r="3" fill="#fff"/><circle cx="57" cy="40" r="3" fill="#fff"/>
+                    </svg>`
                 },
                 {
                     nombre: "Temporal (Masticación)",
@@ -491,7 +499,12 @@
                     accion: "Eleva y retrae la mandíbula.",
                     palpacion: "Aprieta los dientes y toca tu sien: sentirás la contracción.",
                     aplicacion: "Punto tensional de cefaleas por bruxismo y masaje relajante craneofacial.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 38 20 C 50 15 65 20 62 38 Z" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 35 15 C 20 20 20 60 35 80 C 40 88 50 90 55 90 C 65 90 75 80 75 60 C 75 40 70 20 55 12 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Músculo Temporal en la Sien -->
+                        <path d="M 36 25 C 45 18 60 22 58 42 C 48 40 38 35 36 25 Z" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <circle cx="43" cy="50" r="3" fill="#fff"/><circle cx="57" cy="50" r="3" fill="#fff"/>
+                    </svg>`
                 },
                 {
                     nombre: "Orbicular de los Ojos (Periocular)",
@@ -499,7 +512,12 @@
                     accion: "Cierra párpados y parpadeo.",
                     palpacion: "Cierra los ojos con fuerza y palpa sobre la sien y el párpado inferior.",
                     aplicacion: "Tratamiento de patas de gallo, edemas y drenaje linfático periocular.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><circle cx="42" cy="38" r="10" stroke="#ff007f" stroke-width="3" fill="none"/><circle cx="58" cy="38" r="10" stroke="#ff007f" stroke-width="3" fill="none"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 35 15 C 20 20 20 60 35 80 C 40 88 50 90 55 90 C 65 90 75 80 75 60 C 75 40 70 20 55 12 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Orbicular de los Ojos Resaltado -->
+                        <ellipse cx="42" cy="42" rx="9" ry="7" fill="none" stroke="#ff007f" stroke-width="3" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <ellipse cx="61" cy="42" rx="9" ry="7" fill="none" stroke="#ff007f" stroke-width="3" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 },
                 {
                     nombre: "Cigomático Mayor (Sonrisa)",
@@ -507,7 +525,12 @@
                     accion: "Eleva la comisura labial al sonreír.",
                     palpacion: "Sonríe marcando los pómulos y palpa la mejilla.",
                     aplicacion: "Lifting facial sin cirugía, reafirmación del tercio medio y maderoterapia.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 60 42 L 52 65" stroke="#ff007f" stroke-width="4" stroke-linecap="round"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 35 15 C 20 20 20 60 35 80 C 40 88 50 90 55 90 C 65 90 75 80 75 60 C 75 40 70 20 55 12 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Cigomático Mayor Diagonal -->
+                        <path d="M 64 45 L 53 62" stroke="#ff007f" stroke-width="5" stroke-linecap="round" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <circle cx="43" cy="42" r="3" fill="#fff"/><circle cx="61" cy="42" r="3" fill="#fff"/>
+                    </svg>`
                 },
                 {
                     nombre: "Corrugador del Supercilio (Entrecejo)",
@@ -515,7 +538,11 @@
                     accion: "Junta las cejas hacia adentro frunciendo el ceño.",
                     palpacion: "Frunce el ceño y palpa el inicio interno de la ceja.",
                     aplicacion: "Alisado de arrugas glabelares verticales y toxina botulínica.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 38 32 Q 44 32 46 35 M 62 32 Q 56 32 54 35" stroke="#ff007f" stroke-width="4"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 35 15 C 20 20 20 60 35 80 C 40 88 50 90 55 90 C 65 90 75 80 75 60 C 75 40 70 20 55 12 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Corrugador en el Entrecejo -->
+                        <path d="M 43 36 Q 50 34 57 36" stroke="#ff007f" stroke-width="5" stroke-linecap="round" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 },
                 {
                     nombre: "Frontal (Frente)",
@@ -523,7 +550,11 @@
                     accion: "Eleva las cejas y arruga la frente transversalmente.",
                     palpacion: "Mira hacia arriba sorprendida y palpa las líneas de tu frente.",
                     aplicacion: "Relajación de líneas horizontales de expresión y masaje tensor.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 35 22 Q 50 18 65 22" stroke="#ff007f" stroke-width="5"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 35 15 C 20 20 20 60 35 80 C 40 88 50 90 55 90 C 65 90 75 80 75 60 C 75 40 70 20 55 12 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Músculo Frontal -->
+                        <path d="M 38 25 Q 50 20 62 25 L 60 35 Q 50 30 40 35 Z" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 }
             ],
             cuello: [
@@ -533,7 +564,12 @@
                     accion: "Rotación e inclinación cervical.",
                     palpacion: "Gira la cabeza a un lado y palpa el cordón muscular que resalta.",
                     aplicacion: "Guía fundamental para apertura de terminus y Drenaje Linfático Facial y Cervical.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><line x1="42" y1="55" x2="58" y2="78" stroke="#ff007f" stroke-width="5"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <!-- Silueta de la Cabeza y Cuello -->
+                        <path d="M 45 10 C 35 15 35 30 40 45 L 30 85 L 70 85 L 60 45 C 65 30 65 15 55 10 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- ECOM Diagonal en el Cuello -->
+                        <path d="M 45 45 L 60 75" stroke="#ff007f" stroke-width="6" stroke-linecap="round" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 },
                 {
                     nombre: "Platisma (Cuello & Escote)",
@@ -541,7 +577,11 @@
                     accion: "Tensa la piel del cuello y baja la comisura labial.",
                     palpacion: "Muestra los dientes inferiores tensando el cuello.",
                     aplicacion: "Flacidez del cuello (bandas platismales) y firmeza con radiofrecuencia.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 35 60 L 65 60 L 60 80 L 40 80 Z" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 45 10 C 35 15 35 30 40 45 L 30 85 L 70 85 L 60 45 C 65 30 65 15 55 10 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Platisma en abanico sobre el cuello -->
+                        <path d="M 35 55 L 65 55 L 68 80 L 32 80 Z" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 }
             ],
             abdomen: [
@@ -551,7 +591,15 @@
                     accion: "Flexión de tronco y sostén visceral.",
                     palpacion: "Haz un abdominal corto y palpa la pared muscular anterior.",
                     aplicacion: "Electroestimulación con ondas rusas, marcaje y evaluación de diástasis abdominal.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="42" y="30" width="16" height="45" rx="3" fill="#ff007f" stroke="#00ff87" stroke-width="1.5"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <!-- Silueta del Torso Humano -->
+                        <path d="M 30 15 L 70 15 L 75 45 L 68 90 L 32 90 L 25 45 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Recto Abdominal Central -->
+                        <rect x="42" y="40" width="16" height="42" rx="4" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <line x1="50" y1="40" x2="50" y2="82" stroke="#000" stroke-width="1.5"/>
+                        <line x1="42" y1="54" x2="58" y2="54" stroke="#000" stroke-width="1"/>
+                        <line x1="42" y1="68" x2="58" y2="68" stroke="#000" stroke-width="1"/>
+                    </svg>`
                 },
                 {
                     nombre: "Oblicuo Externo (Cintura)",
@@ -559,7 +607,12 @@
                     accion: "Inclinación lateral y moldeo de la cintura.",
                     palpacion: "Inclínate a un lado y palpa el lateral de tu abdomen.",
                     aplicacion: "Masaje reductor de cintura, vacumterapia, cavitación y maderoterapia.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 35 35 L 42 70 M 65 35 L 58 70" stroke="#ff007f" stroke-width="4"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 30 15 L 70 15 L 75 45 L 68 90 L 32 90 L 25 45 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Oblicuos Laterales en Neón -->
+                        <path d="M 33 45 L 42 80 L 37 80 L 28 48 Z" fill="#ff007f" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <path d="M 67 45 L 58 80 L 63 80 L 72 48 Z" fill="#ff007f" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 },
                 {
                     nombre: "Transverso del Abdomen",
@@ -567,7 +620,11 @@
                     accion: "Compresión visceral y soporte lumbar.",
                     palpacion: "Mete el ombligo hacia la columna sin mover la espalda.",
                     aplicacion: "Gimnasia hipopresiva, tonificación profunda y faja reductora natural.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="38" y="45" width="24" height="15" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 30 15 L 70 15 L 75 45 L 68 90 L 32 90 L 25 45 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Transverso Profundo en Faja -->
+                        <path d="M 36 55 Q 50 48 64 55 L 62 70 Q 50 63 38 70 Z" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 }
             ],
             brazos: [
@@ -577,15 +634,12 @@
                     accion: "Abducción del brazo (elevación lateral).",
                     palpacion: "Levanta el brazo lateralmente a 90°.",
                     aplicacion: "Tonificación corporal, reafirmación de hombros y postura del escote.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 22 25 Q 32 15 38 25 L 28 48 Z" fill="#ff007f"/></svg>`
-                },
-                {
-                    nombre: "Bíceps Braquial (Brazo Anterior)",
-                    ubicacion: "Cara anterior del brazo.",
-                    accion: "Flexión de codo y supinación.",
-                    palpacion: "Dobla el codo a 90° haciendo fuerza.",
-                    aplicacion: "Tratamientos reafirmantes para flacidez del brazo (alas de murciélago).",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="25" y="40" width="8" height="25" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <!-- Silueta del Brazo Humano -->
+                        <path d="M 35 15 L 65 15 L 68 40 L 60 85 L 40 85 L 32 40 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Deltoides en el Hombro -->
+                        <path d="M 35 18 C 50 15 65 18 64 35 C 50 38 48 38 35 35 Z" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 },
                 {
                     nombre: "Tríceps Braquial (Brazo Posterior)",
@@ -593,7 +647,11 @@
                     accion: "Extensión de codo.",
                     palpacion: "Empuja el brazo estirado hacia atrás.",
                     aplicacion: "Zona primaria de flacidez dermoepidérmica, radiofrecuencia y electroestimulación.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="67" y="40" width="8" height="25" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <path d="M 35 15 L 65 15 L 68 40 L 60 85 L 40 85 L 32 40 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Tríceps en la parte posterior del brazo -->
+                        <rect x="53" y="38" width="12" height="35" rx="5" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 }
             ],
             piernas: [
@@ -603,7 +661,12 @@
                     accion: "Extensión de rodilla.",
                     palpacion: "Extiende la pierna al frente e identifica la rigidez del muslo.",
                     aplicacion: "Masaje reductor de celulitis anterior, drenaje linfático venoso de piernas cansadas.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 10 L 70 10 L 65 90 L 35 90 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="38" y="25" width="24" height="50" rx="4" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <!-- Silueta de la Pierna / Muslo Humano -->
+                        <path d="M 35 10 L 65 10 L 62 90 L 38 90 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Cuádriceps Muslo Anterior -->
+                        <rect x="40" y="22" width="20" height="52" rx="8" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 },
                 {
                     nombre: "Glúteo Mayor (Pelvis Posterior)",
@@ -611,15 +674,13 @@
                     accion: "Extensión y rotación lateral de cadera.",
                     palpacion: "Extiende la pierna hacia atrás y palpa el glúteo.",
                     aplicacion: "Levantamiento glúteo, copas de succión, reafirmación dermal y electroestimulación.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><circle cx="40" cy="55" r="14" fill="#ff007f"/><circle cx="60" cy="55" r="14" fill="#ff007f"/></svg>`
-                },
-                {
-                    nombre: "Isquiotibiales (Muslo Posterior)",
-                    ubicacion: "Cara posterior del muslo.",
-                    accion: "Flexión de rodilla.",
-                    palpacion: "Dobla la rodilla hacia atrás intentando tocar el glúteo.",
-                    aplicacion: "Tratamiento reductor de celulitis posterior y moldeado del pliegue subglúteo.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 10 L 70 10 L 65 90 L 35 90 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="40" y="30" width="8" height="45" fill="#ff007f"/><rect x="52" y="30" width="8" height="45" fill="#ff007f"/></svg>`
+                    svg: `<svg width="150" height="150" viewBox="0 0 100 100">
+                        <!-- Silueta Cadera / Glúteos -->
+                        <path d="M 28 20 L 72 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="1.5" fill="rgba(0,240,255,0.03)"/>
+                        <!-- Glúteo Mayor en Neón -->
+                        <ellipse cx="42" cy="52" rx="14" ry="18" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                        <ellipse cx="58" cy="52" rx="14" ry="18" fill="#ff007f" stroke="#00ff87" stroke-width="1.5" filter="drop-shadow(0 0 6px #ff007f)"/>
+                    </svg>`
                 }
             ]
         };
@@ -641,7 +702,7 @@
             { q: "Al tratar celulitis en la zona posterior del muslo con maderoterapia debajo del pliegue glúteo, ¿qué músculo estimulas?", opts: ["Isquiotibiales", "Masetero", "Pectoral"], cor: 0, exp: "Los Isquiotibiales se extienden en la cara posterior del muslo." },
             { q: "Al tratar líneas verticales del entrecejo con masajes tensores, ¿qué músculo fruncidor relajas?", opts: ["Corrugador del Supercilio", "Glúteo", "Bíceps"], cor: 0, exp: "El Corrugador atrae la ceja hacia la línea media." },
             { q: "Al tratar arrugas perioculares 'patas de gallo' con drenaje linfático, ¿qué músculo esfínter masajeas?", opts: ["Orbicular de los Ojos", "Oblicuo", "Tríceps"], cor: 0, exp: "El Orbicular de los Ojos rodea por completo las órbitas." },
-            { q: "Para estimular la firmeza en la cara anterior del brazo (bíceps) con radiofrecuencia, ¿qué músculo tratas?", opts: ["Bíceps Braquial", "Glúteo Mayor", "Frontal"], cor: 0, exp: "El Bíceps Braquial ocupa la cara anterior del brazo." },
+            { q: "Para estimular la firmeza en la cara anterior del brazo con radiofrecuencia, ¿qué músculo tratas?", opts: ["Bíceps Braquial", "Glúteo Mayor", "Frontal"], cor: 0, exp: "El Bíceps Braquial ocupa la cara anterior del brazo." },
             { q: "Al elevar las cejas y suavizar arrugas horizontales en la parte superior del rostro, ¿qué músculo ejercitas?", opts: ["Frontal", "ECOM", "Masetero"], cor: 0, exp: "El músculo Frontal recubre la pared anterior de la frente." }
         ];
 
@@ -817,7 +878,7 @@
 
             let html = `
                 <div class="card-header-title">🎯 Desafío Ubicación (${iUbi + 1} de 17)</div>
-                <div class="card-desc">Observa la zona destacada en fucsia neón e identifica cuál es este músculo:</div>
+                <div class="card-desc">Observa la silueta anatómica y reconoce cuál es el músculo resaltado en neón:</div>
 
                 <div class="graphic-container">${item.svg}</div>
 
@@ -866,7 +927,7 @@
 
             let html = `
                 <div class="card-header-title">🎴 Flashcard 3D (${(iFlash % todos.length) + 1} de ${todos.length})</div>
-                <div class="card-desc">Toca la tarjeta para voltearla y descubrir la anatomía, palpación y aplicación en cosmiatría:</div>
+                <div class="card-desc">Toca la silueta anatómica para voltearla y descubrir su ubicación y aplicación en cosmiatría:</div>
 
                 <div class="flip-card" onclick="this.classList.toggle('flipped')">
                     <div class="flip-card-inner">
