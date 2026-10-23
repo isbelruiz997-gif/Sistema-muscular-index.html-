@@ -34,10 +34,9 @@
 
         .app-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
         }
 
-        /* HEADER & DASHBOARD */
         .app-header {
             text-align: center;
             margin-bottom: 12px;
@@ -71,37 +70,53 @@
         .app-subtitle {
             font-size: 12px;
             color: var(--text-sub);
-            margin: 4px 0 12px 0;
+            margin: 4px 0 10px 0;
+        }
+
+        .controls-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0d1322;
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .btn-music {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .stats-bar {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            background: #0d1322;
-            border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin: 0 auto 15px auto;
-            width: fit-content;
+            gap: 12px;
         }
 
         .stat-badge {
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
-        /* NAVEGACIÓN DE PESTAÑAS (TABS) */
         .nav-tabs-scroll {
             display: flex;
             gap: 8px;
             overflow-x: auto;
             padding-bottom: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             scrollbar-width: none;
         }
 
@@ -117,9 +132,6 @@
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
             transition: all 0.2s ease;
         }
 
@@ -130,7 +142,6 @@
             box-shadow: 0 0 12px rgba(225, 29, 72, 0.4);
         }
 
-        /* TARJETA PRINCIPAL */
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
@@ -145,19 +156,15 @@
             font-weight: 800;
             color: #f1f5f9;
             margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .card-desc {
             font-size: 12px;
             color: var(--text-sub);
             margin-bottom: 15px;
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
-        /* BOTONES DE REGION */
         .region-selector {
             display: flex;
             gap: 8px;
@@ -169,14 +176,11 @@
             background-color: #1e293b;
             color: var(--text-main);
             border: 1px solid var(--border);
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 12px;
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .btn-region.active {
@@ -185,7 +189,6 @@
             color: #fbcfe8;
         }
 
-        /* GRÁFICO ANATÓMICO CON MARCADORES */
         .graphic-container {
             width: 100%;
             height: 220px;
@@ -196,11 +199,8 @@
             justify-content: center;
             align-items: center;
             margin-bottom: 15px;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* DETALLE MUSCULAR EXCLUSIVO */
         .info-panel {
             background-color: #0b1120;
             border-left: 4px solid var(--accent-cyan);
@@ -228,7 +228,6 @@
             font-size: 12px;
         }
 
-        /* COMPONENTES DE QUIZ Y FLASHCARDS */
         .btn-opt {
             background-color: #1e293b;
             color: var(--text-main);
@@ -255,18 +254,16 @@
             border-radius: 12px;
             font-weight: 800;
             font-size: 14px;
-            margin-top: 10px;
+            margin-top: 12px;
             cursor: pointer;
         }
 
-        /* TARGETA GIRATORIA (FLASHCARD) */
         .flashcard-box {
             background-color: #1a2336;
-            border: 2px stroke var(--accent-cyan);
+            border: 2px solid var(--accent-cyan);
             border-radius: 16px;
             padding: 20px;
             text-align: center;
-            cursor: pointer;
             margin-bottom: 15px;
             min-height: 160px;
             display: flex;
@@ -279,7 +276,6 @@
 <body>
 
     <div class="app-container">
-        <!-- HEADER PRINCIPAL -->
         <header class="app-header">
             <div class="app-title-container">
                 <h1 class="app-title">AnatoCosmiatría</h1>
@@ -287,31 +283,65 @@
             </div>
             <p class="app-subtitle">Anatomía Muscular para Cosmetología, Cosmiatría y Estética Corporal</p>
 
-            <div class="stats-bar">
-                <div class="stat-badge" style="color: var(--gold);">🏆 <span id="score-val">0</span></div>
-                <div class="stat-badge" style="color: #f43f5e;">🔥 <span id="streak-val">0</span></div>
-                <div class="stat-badge" id="lives-val">❤️ ❤️ ❤️</div>
+            <div class="controls-bar">
+                <button class="btn-music" onclick="toggleMusica()">🎵 Música: <span id="music-state">OFF</span></button>
+                <div class="stats-bar">
+                    <div class="stat-badge" style="color: var(--gold);">🏆 <span id="score-val">0</span></div>
+                    <div class="stat-badge" style="color: #f43f5e;">🔥 <span id="streak-val">0</span></div>
+                    <div class="stat-badge" id="lives-val">❤️ ❤️ ❤️</div>
+                </div>
             </div>
         </header>
 
-        <!-- NAVEGACIÓN POR PESTAÑAS (MODOS) -->
         <div class="nav-tabs-scroll">
             <button class="tab-btn active" id="tab-explorador" onclick="cambiarModo('explorador')">🖐️ Explorador</button>
-            <button class="tab-btn" id="tab-trivias" onclick="cambiarModo('trivias')">🎓 Trivias (3 Módulos)</button>
+            <button class="tab-btn" id="tab-trivias" onclick="cambiarModo('trivias')">🎓 Trivias (Extenso)</button>
             <button class="tab-btn" id="tab-ubicacion" onclick="cambiarModo('ubicacion')">🎯 Desafío Ubicación</button>
             <button class="tab-btn" id="tab-flashcards" onclick="cambiarModo('flashcards')">🎴 Flashcards</button>
         </div>
 
-        <!-- CONTENIDO DINÁMICO DE LA APLICACIÓN -->
         <div class="card" id="app-card"></div>
     </div>
 
     <script>
-        // SINTETIZADOR DE AUDIO
+        // SINTETIZADOR Y MÚSICA AMBIENTAL (Web Audio API)
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let isMusicPlaying = false;
+        let musicTimer = null;
+
+        function toggleMusica() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            isMusicPlaying = !isMusicPlaying;
+            document.getElementById('music-state').innerText = isMusicPlaying ? 'ON 🎶' : 'OFF';
+
+            if (isMusicPlaying) {
+                reproducirLoopMusica();
+            } else {
+                if (musicTimer) clearInterval(musicTimer);
+            }
+        }
+
+        function reproducirLoopMusica() {
+            const notas = [261.63, 293.66, 329.63, 392.00, 440.00];
+            let i = 0;
+            musicTimer = setInterval(() => {
+                if (!isMusicPlaying) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.value = notas[i % notas.length];
+                gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.4);
+                i++;
+            }, 500);
+        }
+
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
-            
             if (type === 'correct') {
                 const notas = [523.25, 659.25, 783.99, 1046.50];
                 notas.forEach((freq, idx) => {
@@ -340,72 +370,145 @@
             }
         }
 
-        // BASE DE DATOS EXTENSA Y PROFUNDA
+        // BANCO EXTENDIDO DE MÚSCULOS Y PREGUNTAS
         const baseAnatomica = {
             cara: [
                 {
                     nombre: "Masetero",
-                    ubicacion: "Arco cigomático hasta el ángulo posterior de la mandíbula.",
-                    accion: "Potente elevador de la mandíbula (oclusión y masticación).",
-                    aplicacion: "Hipertrofia por bruxismo. Punto clave para masajes descontracturantes faciales y perfilado.",
-                    svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                        <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                        <rect x="58" y="50" width="14" height="22" rx="3" fill="#e11d48" stroke="#fb7185"/>
-                        <circle cx="42" cy="38" r="3" fill="#fff"/><circle cx="58" cy="38" r="3" fill="#fff"/>
-                    </svg>`
+                    ubicacion: "Arco cigomático hasta el ángulo mandibular.",
+                    accion: "Potente elevador mandibular.",
+                    aplicacion: "Hipertrofia por bruxismo; masajes descontracturantes.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><rect x="58" y="50" width="14" height="22" rx="3" fill="#e11d48"/><circle cx="42" cy="38" r="3" fill="#fff"/><circle cx="58" cy="38" r="3" fill="#fff"/></svg>`
                 },
                 {
                     nombre: "Orbicular de los Ojos",
-                    ubicacion: "Esfínter muscular completo alrededor de las órbitas oculares.",
-                    accion: "Cierra los párpados y promueve el drenaje de la lágrima.",
-                    aplicacion: "Formación de 'patas de gallo'. Tratamiento con drenaje linfático periocular y toxina botulínica.",
-                    svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                        <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                        <circle cx="42" cy="38" r="10" stroke="#e11d48" stroke-width="3" fill="none"/>
-                        <circle cx="58" cy="38" r="10" stroke="#e11d48" stroke-width="3" fill="none"/>
-                    </svg>`
+                    ubicacion: "Alrededor de las órbitas oculares.",
+                    accion: "Cierra párpados y parpadeo.",
+                    aplicacion: "Patas de gallo, drenaje linfático periocular.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><circle cx="42" cy="38" r="10" stroke="#e11d48" stroke-width="3" fill="none"/><circle cx="58" cy="38" r="10" stroke="#e11d48" stroke-width="3" fill="none"/></svg>`
                 },
                 {
                     nombre: "Cigomático Mayor",
-                    ubicacion: "Desde el hueso cigomático (pómulo) a la comisura labial.",
-                    accion: "Eleva y tracciona la comisura labial lateralmente (sonrisa).",
-                    aplicacion: "Elevación de pómulos, prevención del surco nasogeniano y maderoterapia facial.",
-                    svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                        <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                        <path d="M 60 42 L 52 65" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/>
-                    </svg>`
+                    ubicacion: "Hueso pómulo a la comisura labial.",
+                    accion: "Eleva la comisura labial (sonrisa).",
+                    aplicacion: "Lifting facial y maderoterapia.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M 60 42 L 52 65" stroke="#e11d48" stroke-width="4" stroke-linecap="round"/></svg>`
+                },
+                {
+                    nombre: "Corrugador del Supercilio",
+                    ubicacion: "Zona medial del arco superciliar.",
+                    accion: "Frunce el ceño hacia adentro.",
+                    aplicacion: "Tratamiento de arrugas del entrecejo.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M 38 32 Q 44 32 46 35 M 62 32 Q 56 32 54 35" stroke="#e11d48" stroke-width="4"/></svg>`
+                },
+                {
+                    nombre: "Frontal",
+                    ubicacion: "Zona anterior de la frente.",
+                    accion: "Eleva las cejas y arruga la frente.",
+                    aplicacion: "Líneas de expresión horizontales.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M 35 20 Q 50 18 65 20" stroke="#e11d48" stroke-width="5"/></svg>`
+                },
+                {
+                    nombre: "Esternocleidomastoideo (ECOM)",
+                    ubicacion: "Zona anterolateral del cuello.",
+                    accion: "Rotación e inclinación cervical.",
+                    aplicacion: "Drenaje linfático cervical y masaje.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><line x1="42" y1="55" x2="58" y2="78" stroke="#e11d48" stroke-width="5"/></svg>`
                 }
             ],
             torso: [
                 {
                     nombre: "Recto Abdominal",
-                    ubicacion: "Pared anterior del abdomen, dividido por la línea alba.",
-                    accion: "Flexión de la columna vertebral y compresión visceral.",
-                    aplicacion: "Tonificación con electroestimulación (ondas rusas), cavitación y diástasis abdominal.",
-                    svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                        <path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                        <rect x="42" y="30" width="16" height="45" rx="3" fill="#e11d48"/>
-                    </svg>`
+                    ubicacion: "Pared anterior del abdomen.",
+                    accion: "Flexión de tronco.",
+                    aplicacion: "Electroestimulación (ondas rusas) y diástasis.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><rect x="42" y="30" width="16" height="45" rx="3" fill="#e11d48"/></svg>`
                 },
                 {
                     nombre: "Deltoides",
                     ubicacion: "Cúpula superior del hombro.",
-                    accion: "Abducción del brazo y elevación lateral.",
-                    aplicacion: "Protocolos de tonificación corporal y moldeado de brazos.",
-                    svg: `<svg width="120" height="120" viewBox="0 0 100 100">
-                        <path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                        <path d="M 22 25 Q 32 15 38 25 L 28 48 Z" fill="#e11d48"/>
-                    </svg>`
+                    accion: "Abducción del brazo.",
+                    aplicacion: "Tonificación y modelado corporal.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M 22 25 Q 32 15 38 25 L 28 48 Z" fill="#e11d48"/></svg>`
+                },
+                {
+                    nombre: "Pectoral Mayor",
+                    ubicacion: "Pared anterior del tórax.",
+                    accion: "Aducción de hombro.",
+                    aplicacion: "Firmeza del busto y escote.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M 32 25 Q 50 20 68 25 L 62 45 Q 50 48 38 45 Z" fill="#e11d48"/></svg>`
+                },
+                {
+                    nombre: "Trapecio",
+                    ubicacion: "Espalda superior y cuello posterior.",
+                    accion: "Elevación escapular.",
+                    aplicacion: "Masajes descontracturantes de hombros.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><path d="M 35 22 L 65 22 L 50 50 Z" fill="#e11d48"/></svg>`
+                },
+                {
+                    nombre: "Glúteo Mayor",
+                    ubicacion: "Región posterior de la pelvis.",
+                    accion: "Extensión de cadera.",
+                    aplicacion: "Levantamiento glúteo y vacumterapia.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><circle cx="40" cy="65" r="12" fill="#e11d48"/><circle cx="60" cy="65" r="12" fill="#e11d48"/></svg>`
+                },
+                {
+                    nombre: "Transverso del Abdomen",
+                    ubicacion: "Capa profunda del abdomen.",
+                    accion: "Compresión visceral y faja natural.",
+                    aplicacion: "Gimnasia hipopresiva y cinturón anatómico.",
+                    svg: `<svg width="120" height="120" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#38bdf8" stroke-width="2" fill="none"/><rect x="38" y="45" width="24" height="15" fill="#e11d48"/></svg>`
                 }
             ]
         };
+
+        const triviasBanco = [
+            {
+                q: "Al realizar un tratamiento de lifting facial para elevar pómulos y definir comisuras labiales, ¿qué músculo estimulas principalmente?",
+                opts: ["Cigomático Mayor", "Masetero", "Trapecio"],
+                cor: 0,
+                exp: "El Cigomático Mayor eleva las comisuras de la boca."
+            },
+            {
+                q: "Para aliviar el dolor por apretar los dientes (bruxismo), ¿sobre qué músculo aplicas masaje descontracturante?",
+                opts: ["Masetero", "Orbicular de los Ojos", "Frontal"],
+                cor: 0,
+                exp: "El Masetero es el elevador mandibular principal."
+            },
+            {
+                q: "¿Qué músculo frunce el entrecejo generando arrugas verticales de molestia?",
+                opts: ["Corrugador del Supercilio", "Risorio", "Deltoides"],
+                cor: 0,
+                exp: "El Corrugador atrae la ceja hacia adentro."
+            },
+            {
+                q: "Al realizar un drenaje linfático en el cuello, ¿qué músculo sirve de guía anterolateral?",
+                opts: ["Esternocleidomastoideo (ECOM)", "Recto Abdominal", "Bucinador"],
+                cor: 0,
+                exp: "El ECOM recorre diagonalmente el cuello."
+            },
+            {
+                q: "¿Qué músculo profundo actúa como 'faja anatómica' estabilizando el abdomen?",
+                opts: ["Transverso del Abdomen", "Pectoral Mayor", "Glúteo Mayor"],
+                cor: 0,
+                exp: "El Transverso comprime la cavidad abdominal."
+            },
+            {
+                q: "Al trabajar tonificación con electroestimulación en el hombro, ¿qué músculo se activa?",
+                opts: ["Deltoides", "Temporal", "Orbicular de los Labios"],
+                cor: 0,
+                exp: "El Deltoides recubre la cúpula del hombro."
+            }
+        ];
 
         let puntos = 0;
         let racha = 0;
         let vidas = 3;
         let modoActual = 'explorador';
         let subZona = 'cara';
-        let iFlashcard = 0;
+        let iTrivia = 0;
+        let iUbi = 0;
+        let iFlash = 0;
         let respondido = false;
 
         function actualizarBarra() {
@@ -419,32 +522,31 @@
 
         function cambiarModo(modo) {
             modoActual = modo;
+            respondido = false;
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`tab-${modo}`).classList.add('active');
 
             if(modo === 'explorador') renderExplorador();
-            if(modo === 'trivias') renderTrivias();
-            if(modo === 'ubicacion') renderUbicacion();
-            if(modo === 'flashcards') renderFlashcards();
+            if(modo === 'trivias') { iTrivia = 0; renderTrivias(); }
+            if(modo === 'ubicacion') { iUbi = 0; renderUbicacion(); }
+            if(modo === 'flashcards') { iFlash = 0; renderFlashcards(); }
         }
 
-        // --- MODO 1: EXPLORADOR ---
+        // MODO 1: EXPLORADOR
         function renderExplorador() {
             const card = document.getElementById('app-card');
             const lista = baseAnatomica[subZona];
 
             let html = `
                 <div class="card-header-title">🖐️ Explorador Muscular Cosmiátrico</div>
-                <div class="card-desc">Selecciona un músculo para ver su aplicación en masajes, lifting, aparatología y tratamiento estético.</div>
+                <div class="card-desc">Selecciona un músculo para revisar su acción y aplicación estética.</div>
 
                 <div class="region-selector">
-                    <button class="btn-region ${subZona==='cara'?'active':''}" onclick="setSubZona('cara')">🌸 Cara y Cuello 🌟</button>
-                    <button class="btn-region ${subZona==='torso'?'active':''}" onclick="setSubZona('torso')">🧍 Abdomen & Torso 🌟</button>
+                    <button class="btn-region ${subZona==='cara'?'active':''}" onclick="subZona='cara'; renderExplorador();">🌸 Cara y Cuello</button>
+                    <button class="btn-region ${subZona==='torso'?'active':''}" onclick="subZona='torso'; renderExplorador();">🧍 Abdomen & Torso</button>
                 </div>
 
-                <div class="graphic-container">
-                    ${lista[0].svg}
-                </div>
+                <div class="graphic-container">${lista[0].svg}</div>
 
                 <div class="region-selector">
             `;
@@ -463,11 +565,6 @@
             card.innerHTML = html;
         }
 
-        function setSubZona(z) {
-            subZona = z;
-            renderExplorador();
-        }
-
         function verDetalleExplorador(idx) {
             const m = baseAnatomica[subZona][idx];
             document.querySelector('.graphic-container').innerHTML = m.svg;
@@ -479,108 +576,126 @@
             `;
         }
 
-        // --- MODO 2: TRIVIAS ---
+        // MODO 2: TRIVIAS (SECUENCIA FLUIDA)
         function renderTrivias() {
             respondido = false;
             const card = document.getElementById('app-card');
-            card.innerHTML = `
-                <div class="card-header-title">🎓 Trivia Cosmiátrica</div>
-                <div class="card-desc">Al realizar un tratamiento de lifting facial para elevar pómulos y definir comisuras labiales, ¿qué músculo principal estás estimulando?</div>
+            const q = triviasBanco[iTrivia % triviasBanco.length];
 
-                <button class="btn-opt" onclick="evaluarTrivia(true, this)">A) Cigomático Mayor</button>
-                <button class="btn-opt" onclick="evaluarTrivia(false, this)">B) Masetero</button>
-                <button class="btn-opt" onclick="evaluarTrivia(false, this)">C) Trapecio</button>
-
-                <div id="fb-trivia" style="margin-top:10px; font-size:13px; display:none;"></div>
-                <button class="btn-next" id="btn-next-tr" style="display:none;" onclick="renderTrivias()">Siguiente Pregunta ➔</button>
+            let html = `
+                <div class="card-header-title">🎓 Trivia (${iTrivia + 1} de ${triviasBanco.length})</div>
+                <div class="card-desc">${q.q}</div>
             `;
+
+            q.opts.forEach((op, idx) => {
+                html += `<button class="btn-opt" onclick="evaluarTrivia(${idx === q.cor}, this, ${q.cor})">${op}</button>`;
+            });
+
+            html += `
+                <div id="fb-trivia" style="margin-top:10px; font-size:13px; display:none;"></div>
+                <button class="btn-next" id="btn-next-tr" style="display:none;" onclick="siguienteTrivia()">Siguiente Pregunta ➔</button>
+            `;
+
+            card.innerHTML = html;
         }
 
-        function evaluarTrivia(correcto, btn) {
+        function evaluarTrivia(correcto, btn, corIdx) {
             if(respondido) return;
             respondido = true;
             const fb = document.getElementById('fb-trivia');
+            const btns = document.querySelectorAll('.btn-opt');
+            const q = triviasBanco[iTrivia % triviasBanco.length];
 
             if(correcto) {
                 playSound('correct');
                 btn.classList.add('correct');
                 puntos += 100; racha++;
-                fb.innerHTML = "<span style='color:var(--correct); font-weight:bold;'>¡Correcto!</span> El Cigomático Mayor eleva las comisuras de la boca.";
+                if (racha % 3 === 0 && vidas < 3) vidas++;
+                fb.innerHTML = `<span style='color:var(--correct); font-weight:bold;'>¡Correcto! 🎉</span><br>${q.exp}`;
             } else {
                 playSound('wrong');
                 btn.classList.add('wrong');
+                btns[corIdx].classList.add('correct');
                 racha = 0; vidas--;
-                fb.innerHTML = "<span style='color:var(--wrong); font-weight:bold;'>Incorrecto.</span> Revisa el módulo de Cara y Cuello.";
+                fb.innerHTML = `<span style='color:var(--wrong); font-weight:bold;'>Incorrecto ❌</span><br>${q.exp}`;
             }
             actualizarBarra();
             fb.style.display = 'block';
             document.getElementById('btn-next-tr').style.display = 'block';
         }
 
-        // --- MODO 3: DESAFÍO UBICACIÓN ---
-        function renderUbicacion() {
-            const card = document.getElementById('app-card');
-            card.innerHTML = `
-                <div class="card-header-title">🎯 Desafío Ubicación</div>
-                <div class="card-desc">Toca en la zona resalta en rojo del diagrama para identificar su nombre:</div>
-
-                <div class="graphic-container">
-                    <svg width="120" height="120" viewBox="0 0 100 100">
-                        <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#38bdf8" stroke-width="2" fill="none"/>
-                        <rect x="58" y="50" width="14" height="22" rx="3" fill="#e11d48" stroke="#fb7185"/>
-                    </svg>
-                </div>
-
-                <button class="btn-opt" onclick="evaluarUbi(true, this)">Masetero</button>
-                <button class="btn-opt" onclick="evaluarUbi(false, this)">Frontal</button>
-                <button class="btn-opt" onclick="evaluarUbi(false, this)">Deltoides</button>
-
-                <div id="fb-ubi" style="margin-top:10px; font-size:13px; display:none;"></div>
-                <button class="btn-next" id="btn-next-ub" style="display:none;" onclick="renderUbicacion()">Siguiente Ubicación ➔</button>
-            `;
+        function siguienteTrivia() {
+            iTrivia++;
+            renderTrivias();
         }
 
-        function evaluarUbi(cor, btn) {
+        // MODO 3: DESAFÍO UBICACIÓN
+        function renderUbicacion() {
+            respondido = false;
+            const card = document.getElementById('app-card');
+            const todos = [...baseAnatomica.cara, ...baseAnatomica.torso];
+            const item = todos[iUbi % todos.length];
+
+            let html = `
+                <div class="card-header-title">🎯 Desafío Ubicación (${iUbi + 1} de ${todos.length})</div>
+                <div class="card-desc">Observa la zona destacada en rojo y selecciona el músculo correcto:</div>
+
+                <div class="graphic-container">${item.svg}</div>
+
+                <button class="btn-opt" onclick="evaluarUbi('${item.nombre}', '${item.nombre}', this)">${item.nombre}</button>
+                <button class="btn-opt" onclick="evaluarUbi('Incorrecto1', '${item.nombre}', this)">Deltoides</button>
+                <button class="btn-opt" onclick="evaluarUbi('Incorrecto2', '${item.nombre}', this)">Trapecio</button>
+
+                <div id="fb-ubi" style="margin-top:10px; font-size:13px; display:none;"></div>
+                <button class="btn-next" id="btn-next-ub" style="display:none;" onclick="iUbi++; renderUbicacion();">Siguiente Ubicación ➔</button>
+            `;
+
+            card.innerHTML = html;
+        }
+
+        function evaluarUbi(elegido, correcto, btn) {
             if(respondido) return;
             respondido = true;
             const fb = document.getElementById('fb-ubi');
 
-            if(cor) {
+            if(elegido === correcto) {
                 playSound('correct');
                 btn.classList.add('correct');
                 puntos += 100; racha++;
-                fb.innerHTML = "<span style='color:var(--correct); font-weight:bold;'>¡Correcto!</span> Es el Masetero en la mandíbula.";
+                fb.innerHTML = `<span style='color:var(--correct); font-weight:bold;'>¡Correcto!</span> Corresponde a ${correcto}.`;
             } else {
                 playSound('wrong');
                 btn.classList.add('wrong');
                 racha = 0; vidas--;
-                fb.innerHTML = "<span style='color:var(--wrong); font-weight:bold;'>Incorrecto.</span>";
+                fb.innerHTML = `<span style='color:var(--wrong); font-weight:bold;'>Incorrecto.</span> Era ${correcto}.`;
             }
             actualizarBarra();
             fb.style.display = 'block';
             document.getElementById('btn-next-ub').style.display = 'block';
         }
 
-        // --- MODO 4: FLASHCARDS ---
+        // MODO 4: FLASHCARDS
         function renderFlashcards() {
+            respondido = false;
             const card = document.getElementById('app-card');
-            const item = baseAnatomica.cara[iFlashcard % baseAnatomica.cara.length];
+            const todos = [...baseAnatomica.cara, ...baseAnatomica.torso];
+            const item = todos[iFlash % todos.length];
 
-            card.innerHTML = `
-                <div class="card-header-title">🎴 Flashcards (Descubre el Músculo)</div>
-                <div class="card-desc">Observa la ilustración anatómica y selecciona el nombre correspondiente:</div>
+            let html = `
+                <div class="card-header-title">🎴 Flashcards (${iFlash + 1} de ${todos.length})</div>
+                <div class="card-desc">Identifica la tarjeta técnica anatómica:</div>
 
-                <div class="flashcard-box">
-                    ${item.svg}
-                </div>
+                <div class="flashcard-box">${item.svg}</div>
 
                 <button class="btn-opt" onclick="evaluarFlash('${item.nombre}', '${item.nombre}', this)">${item.nombre}</button>
-                <button class="btn-opt" onclick="evaluarFlash('Deltoides', '${item.nombre}', this)">Deltoides</button>
-                <button class="btn-opt" onclick="evaluarFlash('Recto Abdominal', '${item.nombre}', this)">Recto Abdominal</button>
+                <button class="btn-opt" onclick="evaluarFlash('Glúteo Mayor', '${item.nombre}', this)">Glúteo Mayor</button>
+                <button class="btn-opt" onclick="evaluarFlash('Frontal', '${item.nombre}', this)">Frontal</button>
 
                 <div id="fb-flash" style="margin-top:10px; font-size:13px; display:none;"></div>
-                <button class="btn-next" id="btn-next-fl" style="display:none;" onclick="iFlashcard++; renderFlashcards();">Siguiente Flashcard ➔</button>
+                <button class="btn-next" id="btn-next-fl" style="display:none;" onclick="iFlash++; renderFlashcards();">Siguiente Flashcard ➔</button>
             `;
+
+            card.innerHTML = html;
         }
 
         function evaluarFlash(elegido, correcto, btn) {
@@ -592,7 +707,7 @@
                 playSound('correct');
                 btn.classList.add('correct');
                 puntos += 100; racha++;
-                fb.innerHTML = `<span style='color:var(--correct); font-weight:bold;'>¡Correcto!</span> Acertaste la tarjeta.`;
+                fb.innerHTML = `<span style='color:var(--correct); font-weight:bold;'>¡Acertaste!</span>`;
             } else {
                 playSound('wrong');
                 btn.classList.add('wrong');
