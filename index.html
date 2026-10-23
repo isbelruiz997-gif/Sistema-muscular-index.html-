@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desafío AnatomicPro - Estudio de Músculos</title>
+    <title>AnatoMaster - Juego & Estudio Muscular</title>
     <style>
         :root {
             --bg: #0f172a;
             --card: #1e293b;
             --primary: #f43f5e;
-            --primary-hover: #e11d48;
+            --accent: #38bdf8;
             --correct: #10b981;
             --wrong: #ef4444;
             --text: #f8fafc;
@@ -22,7 +22,7 @@
             background-color: var(--bg);
             color: var(--text);
             margin: 0;
-            padding: 15px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -31,311 +31,371 @@
 
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            color: #fb7185;
-            margin: 0 0 5px 0;
-            font-size: 22px;
-        }
-
-        .score-board {
-            background-color: #0f172a;
+        /* Dashboard de Vidas y Racha */
+        .dash-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card);
             border: 1px solid var(--border);
-            padding: 8px 16px;
-            border-radius: 20px;
-            display: inline-block;
+            padding: 10px 15px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+        }
+
+        .dash-item {
             font-size: 14px;
             font-weight: bold;
-            color: #38bdf8;
-            margin-top: 5px;
         }
+
+        .fire { color: #ffb703; }
 
         .card {
             background-color: var(--card);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 20px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        .category-badge {
-            background-color: #334155;
-            color: #fda4af;
-            font-size: 11px;
+        .mode-title {
+            color: var(--accent);
+            font-size: 12px;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 4px 10px;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #fb7185;
+        }
+
+        /* Estilos Modo Estudio (Flashcards) */
+        .study-box {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
             border-radius: 12px;
-            display: inline-block;
-            margin-bottom: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
         }
 
-        .question-text {
-            font-size: 16px;
-            line-height: 1.5;
+        .study-item {
+            margin-bottom: 10px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .study-label {
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* Estilos Modo Quiz */
+        .q-text {
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 18px;
-            color: #f1f5f9;
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
-        .options-grid {
+        .btn-grid {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        .btn-option {
+        .btn-opt {
             background-color: #334155;
             color: var(--text);
             border: 1px solid var(--border);
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-option:active {
-            transform: scale(0.98);
-        }
-
-        .btn-option.correct {
-            background-color: var(--correct) !important;
-            border-color: #34d399 !important;
-            color: white;
-        }
-
-        .btn-option.wrong {
-            background-color: var(--wrong) !important;
-            border-color: #f87171 !important;
-            color: white;
-        }
-
-        .explanation-box {
-            margin-top: 15px;
             padding: 12px;
             border-radius: 10px;
-            background-color: #0f172a;
-            border: 1px solid var(--border);
             font-size: 13px;
-            line-height: 1.4;
-            display: none;
+            text-align: left;
+            cursor: pointer;
         }
 
-        .explanation-title {
-            font-weight: bold;
-            color: #38bdf8;
-            margin-bottom: 5px;
-        }
+        .btn-opt.correct { background-color: var(--correct) !important; color: white; }
+        .btn-opt.wrong { background-color: var(--wrong) !important; color: white; }
 
-        .btn-next {
+        .btn-action {
             background-color: var(--primary);
             color: white;
             border: none;
             width: 100%;
-            padding: 12px;
+            padding: 13px;
             border-radius: 10px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
             margin-top: 15px;
             cursor: pointer;
+        }
+
+        .hint-text {
+            background-color: #0d1527;
+            border-left: 3px solid var(--accent);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 12px;
             display: none;
         }
 
-        .btn-next:hover {
-            background-color: var(--primary-hover);
+        .recovery-banner {
+            background-color: #064e3b;
+            color: #a7f3d0;
+            border: 1px solid #10b981;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            text-align: center;
+            margin-bottom: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header>
-            <h1>🧠 AnatomiQuiz Muscular</h1>
-            <div class="score-board">Puntos: <span id="score">0</span> / <span id="total-q">0</span></div>
-        </header>
+        <!-- Dashboard Gamificado -->
+        <div class="dash-bar">
+            <div class="dash-item" id="lives-disp">❤️ ❤️ ❤️</div>
+            <div class="dash-item fire">🔥 Racha: <span id="streak-disp">0</span></div>
+            <div class="dash-item" style="color: var(--accent);">⭐ <span id="score-disp">0</span> pts</div>
+        </div>
 
-        <div class="card" id="quiz-card">
-            <span class="category-badge" id="badge-cat">Cargando...</span>
-            <div class="question-text" id="q-text">Cargando pregunta...</div>
+        <div class="recovery-banner" id="rec-banner">
+            🎉 ¡Racha de 3 aciertos! Recuperaste 1 Vida extra ❤️
+        </div>
 
-            <div class="options-grid" id="options-container"></div>
-
-            <div class="explanation-box" id="explanation">
-                <div class="explanation-title" id="exp-title">Explicación Anatómica:</div>
-                <div id="exp-text"></div>
-            </div>
-
-            <button class="btn-next" id="btn-next" onclick="siguientePregunta()">Siguiente Pregunta ➔</button>
+        <!-- Tarjeta Dinámica de Juego -->
+        <div class="card" id="main-card">
+            <!-- El contenido cambia dinámicamente entre Lección y Examen -->
         </div>
     </div>
 
     <script>
-        const preguntas = [
+        const modulos = [
             {
-                categoria: "Anatomía Facial",
-                pregunta: "Si arrugas fuertemente el ceño hacia adentro mostrando molestia o concentración, ¿qué músculo sientes contrayéndose justo encima de las cejas?",
-                opciones: [
-                    "Corrugador del supercilio",
-                    "Orbicular de los ojos",
-                    "Masetero",
-                    "Cigomático mayor"
+                zona: "Músculos Faciales & Masticación",
+                leccion: [
+                    {
+                        nombre: "Masetero",
+                        ubicacion: "Lateral posterior de la mandíbula.",
+                        funcion: "Es el músculo principal de la masticación. Aprieta los dientes con fuerza."
+                    },
+                    {
+                        nombre: "Orbicular de los Labios",
+                        ubicacion: "Alrededor de la boca.",
+                        funcion: "Permite proyectar los labios para soplar, silbar o besar."
+                    },
+                    {
+                        nombre: "Corrugador del Supercilio",
+                        ubicacion: "Sobre las cejas (entrecejo).",
+                        funcion: "Arruga el ceño hacia adentro al concentrarte o molestarte."
+                    }
                 ],
-                correcta: 0,
-                ubicacion: "Ubicación: Sobre el arco superciliar, profundo al músculo frontal.",
-                funcion: "Función: Atrae la ceja hacia adentro y abajo, produciendo las arrugas verticales del entrecejo."
+                preguntas: [
+                    {
+                        pregunta: "¿Qué músculo es el principal responsable de la fuerza en la masticación cuando muerdes alimentos?",
+                        pista: "Se ubica en los laterales de la mandíbula y se endurece al apretar los dientes.",
+                        opciones: ["Orbicular de los labios", "Masetero", "Corrugador", "Trapecio"],
+                        correcta: 1,
+                        explicacion: "El Masetero se inserta en la mandíbula y ejerce la presión necesaria para masticar."
+                    },
+                    {
+                        pregunta: "¿Qué músculo utilizas principalmente para silbar, soplar o besar?",
+                        pista: "Forma un anillo muscular completo alrededor de los labios.",
+                        opciones: ["Masetero", "Cigomático", "Orbicular de los Labios", "Frontal"],
+                        correcta: 2,
+                        explicacion: "El Orbicular de los Labios rodea la boca y permite el cierre y la proyección de los labios."
+                    }
+                ]
             },
             {
-                categoria: "Músculos Corporales",
-                pregunta: "Al levantar el brazo lateralmente alejándolo del cuerpo (abducción del hombro), ¿qué músculo principal sientes trabajando en la parte superior del hombro?",
-                opciones: [
-                    "Pectoral mayor",
-                    "Deltoides",
-                    "Bíceps braquial",
-                    "Dorsal ancho"
+                zona: "Cuello, Espalda y Brazos",
+                leccion: [
+                    {
+                        nombre: "Esternocleidomastoideo (ECOM)",
+                        ubicacion: "Anterolateral del cuello.",
+                        funcion: "Permite girar la cabeza hacia los lados e inclinar el cuello."
+                    },
+                    {
+                        nombre: "Deltoides",
+                        ubicacion: "Parte superior del hombro.",
+                        funcion: "Músculo clave para levantar el brazo hacia los lados (abducción)."
+                    }
                 ],
-                correcta: 1,
-                ubicacion: "Ubicación: Cubre la articulación del hombro en forma de semi-cono.",
-                funcion: "Función: Levanta el brazo hacia los lados (abducción), adelante y atrás."
-            },
-            {
-                categoria: "Anatomía Facial & Masticación",
-                pregunta: "Aprieta fuertemente los dientes y toca los laterales de tu mandíbula. Sentirás un músculo duro y potente. ¿Cuál es?",
-                opciones: [
-                    "Platisma",
-                    "Orbicular de los labios",
-                    "Masetero",
-                    "Risorio"
-                ],
-                correcta: 2,
-                ubicacion: "Ubicación: Lateral de la cara, va desde el arco cigomático hasta la mandíbula.",
-                funcion: "Función: Eleva la mandíbula con fuerza para la masticación."
-            },
-            {
-                categoria: "Tórax y Abdomen",
-                pregunta: "Cuando haces abdominales llevando el pecho hacia las rodillas, ¿qué músculo largo de la pared anterior del abdomen se encarga de flexionar el tronco?",
-                opciones: [
-                    "Recto abdominal",
-                    "Trapecio",
-                    "Glúteo mayor",
-                    "Platisma"
-                ],
-                correcta: 0,
-                ubicacion: "Ubicación: Pared anterior del abdomen, dividido por la línea alba.",
-                funcion: "Función: Flexiona la columna vertebral y comprime la cavidad abdominal."
-            },
-            {
-                categoria: "Cuello y Escote",
-                pregunta: "Al girar la cabeza firmemente hacia la derecha, en el lado izquierdo del cuello sobresale un cordón muscular muy marcado. ¿Cómo se llama?",
-                opciones: [
-                    "Deltoides",
-                    "Esternocleidomastoideo (ECOM)",
-                    "Frontal",
-                    "Sartorio"
-                ],
-                correcta: 1,
-                ubicacion: "Ubicación: Zona anterolateral del cuello, desde el esternón y clavícula hasta la apófisis mastoides.",
-                funcion: "Función: Rotación e inclinación de la cabeza, y flexión del cuello."
-            },
-            {
-                categoria: "Extremidades Inferiores",
-                pregunta: "Si te pones de pie y extiendes la pierna hacia atrás con fuerza o subes escalones, ¿qué músculo grande y potente en la zona posterior de la cadera se activa?",
-                opciones: [
-                    "Cuádriceps",
-                    "Glúteo mayor",
-                    "Gastrocnemio (Gemelo)",
-                    "Trapecio"
-                ],
-                correcta: 1,
-                ubicacion: "Ubicación: Región posterior de la pelvis/cadera.",
-                funcion: "Función: Principal extensor y rotador externo de la cadera."
+                preguntas: [
+                    {
+                        pregunta: "Si giras tu cabeza hacia la derecha para mirar sobre tu hombro, ¿qué músculo resalta en tu cuello?",
+                        pista: "Va desde el esternón/clavícula hasta detrás de la oreja.",
+                        opciones: ["Deltoides", "Esternocleidomastoideo", "Masetero", "Recto Abdominal"],
+                        correcta: 1,
+                        explicacion: "El Esternocleidomastoideo permite la rotación y flexión del cuello."
+                    },
+                    {
+                        pregunta: "Al levantar el brazo lateralmente hacia arriba, ¿qué músculo en forma de capuchón trabaja en el hombro?",
+                        pista: "Cubre toda la articulación superior del hombro.",
+                        opciones: ["Deltoides", "Bíceps", "Orbicular", "Platisma"],
+                        correcta: 0,
+                        explicacion: "El Deltoides eleva el brazo y le da la forma redondeada al hombro."
+                    }
+                ]
             }
         ];
 
-        let indiceActual = 0;
+        let iModulo = 0;
+        let iPregunta = 0;
         let puntos = 0;
+        let racha = 0;
+        let vidas = 3;
         let respondido = false;
+
+        function actualizarDash() {
+            document.getElementById('score-disp').innerText = puntos;
+            document.getElementById('streak-disp').innerText = racha;
+            let h = "";
+            for(let i=0; i<vidas; i++) h += "❤️ ";
+            for(let i=vidas; i<3; i++) h += "🖤 ";
+            document.getElementById('lives-disp').innerText = h;
+        }
+
+        function mostrarLeccion() {
+            const mod = modulos[iModulo];
+            let htmlLeccion = `
+                <div class="mode-title">📖 Módulo de Aprendizaje</div>
+                <h2>${mod.zona}</h2>
+                <p style="font-size:13px; color:var(--subtext); margin-bottom:15px;">Repasa estos conceptos antes de iniciar el desafío interactivo:</p>
+            `;
+
+            mod.leccion.forEach(m => {
+                htmlLeccion += `
+                    <div class="study-box">
+                        <div style="font-weight:bold; color:#fda4af; font-size:15px; margin-bottom:4px;">🔹 ${m.nombre}</div>
+                        <div class="study-item"><span class="study-label">📍 Ubicación:</span> ${m.ubicacion}</div>
+                        <div class="study-item"><span class="study-label">⚙️ Función:</span> ${m.funcion}</div>
+                    </div>
+                `;
+            });
+
+            htmlLeccion += `<button class="btn-action" onclick="iniciarQuiz()">¡Estoy lista, comenzar examen! 🎯</button>`;
+            document.getElementById('main-card').innerHTML = htmlLeccion;
+            actualizarDash();
+        }
+
+        function iniciarQuiz() {
+            iPregunta = 0;
+            cargarPregunta();
+        }
 
         function cargarPregunta() {
             respondido = false;
-            const q = preguntas[indiceActual];
+            const q = modulos[iModulo].preguntas[iPregunta];
 
-            document.getElementById('badge-cat').innerText = q.categoria;
-            document.getElementById('q-text').innerText = q.pregunta;
-            document.getElementById('total-q').innerText = preguntas.length;
-            document.getElementById('score').innerText = puntos;
+            let html = `
+                <div class="mode-title">🎯 Desafío de Aprendizaje</div>
+                <div class="q-text">${q.pregunta}</div>
 
-            document.getElementById('explanation').style.display = 'none';
-            document.getElementById('btn-next').style.display = 'none';
+                <button style="background:none; border:1px dashed var(--accent); color:var(--accent); padding:5px 10px; border-radius:6px; font-size:12px; margin-bottom:10px; cursor:pointer;" onclick="document.getElementById('pista').style.display='block'">💡 Ver Pista</button>
+                <div class="hint-text" id="pista">Pista: ${q.pista}</div>
 
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
+                <div class="btn-grid">
+            `;
 
-            q.opciones.forEach((op, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'btn-option';
-                btn.innerText = `${String.fromCharCode(65 + index)}) ${op}`;
-                btn.onclick = () => verificarRespuesta(index, btn);
-                container.appendChild(btn);
+            q.opciones.forEach((op, idx) => {
+                html += `<button class="btn-opt" onclick="evaluar(${idx}, this)">${String.fromCharCode(65+idx)}) ${op}</button>`;
             });
+
+            html += `</div><div id="feedback" style="margin-top:15px; font-size:13px; display:none;"></div>`;
+            html += `<button class="btn-action" id="btn-next" style="display:none;" onclick="siguiente()">Siguiente ➔</button>`;
+
+            document.getElementById('main-card').innerHTML = html;
+            actualizarDash();
         }
 
-        function verificarRespuesta(seleccionada, btnElegido) {
+        function evaluar(idxOpt, btn) {
             if (respondido) return;
             respondido = true;
 
-            const q = preguntas[indiceActual];
-            const botones = document.querySelectorAll('.btn-option');
+            const q = modulos[iModulo].preguntas[iPregunta];
+            const fb = document.getElementById('feedback');
+            const btns = document.querySelectorAll('.btn-opt');
 
-            if (seleccionada === q.correcta) {
-                btnElegido.classList.add('correct');
-                puntos++;
-                document.getElementById('score').innerText = puntos;
+            if (idxOpt === q.correcta) {
+                btn.classList.add('correct');
+                racha++;
+                puntos += 100 + (racha * 20);
+
+                if (racha % 3 === 0 && vidas < 3) {
+                    vidas++;
+                    const banner = document.getElementById('rec-banner');
+                    banner.style.display = 'block';
+                    setTimeout(() => banner.style.display = 'none', 3000);
+                }
+                fb.innerHTML = `<span style="color:var(--correct); font-weight:bold;">¡Correcto!</span> ${q.explicacion}`;
             } else {
-                btnElegido.classList.add('wrong');
-                botones[q.correcta].classList.add('correct');
+                btn.classList.add('wrong');
+                btns[q.correcta].classList.add('correct');
+                racha = 0;
+                vidas--;
+                fb.innerHTML = `<span style="color:var(--wrong); font-weight:bold;">Incorrecto.</span> ${q.explicacion}`;
             }
 
-            // Mostrar explicación explicativa
-            document.getElementById('exp-text').innerHTML = `
-                <strong>${q.opciones[q.correcta]}</strong><br>
-                📍 <em>${q.ubicacion}</em><br>
-                ⚙️ <em>${q.funcion}</em>
-            `;
-            document.getElementById('explanation').style.display = 'block';
-            document.getElementById('btn-next').style.display = 'block';
+            fb.style.display = 'block';
+            actualizarDash();
+
+            if (vidas > 0) {
+                document.getElementById('btn-next').style.display = 'block';
+            } else {
+                setTimeout(gameOver, 1200);
+            }
         }
 
-        function siguientePregunta() {
-            indiceActual++;
-            if (indiceActual < preguntas.length) {
+        function siguiente() {
+            iPregunta++;
+            if (iPregunta < modulos[iModulo].preguntas.length) {
                 cargarPregunta();
             } else {
-                mostrarResultadoFinal();
+                iModulo++;
+                if (iModulo < modulos.length) {
+                    mostrarLeccion();
+                } else {
+                    victoria();
+                }
             }
         }
 
-        function mostrarResultadoFinal() {
-            const card = document.getElementById('quiz-card');
-            card.innerHTML = `
-                <div style="text-align: center; padding: 10px;">
-                    <h2 style="color: #fb7185; margin-bottom: 10px;">🎉 ¡Cuestionario Completado!</h2>
-                    <p style="font-size: 16px;">Obtuviste <strong>${puntos}</strong> de <strong>${preguntas.length}</strong> aciertos.</p>
-                    <p style="color: var(--subtext); font-size: 13px;">${puntos === preguntas.length ? '¡Excelente! Dominas perfectamente la ubicación y función muscular.' : '¡Buen intento! Puedes volver a repasar para afianzar tus conocimientos.'}</p>
-                    <button class="btn-next" style="display:block;" onclick="location.reload()">Reiniciar Test 🔄</button>
+        function gameOver() {
+            document.getElementById('main-card').innerHTML = `
+                <div style="text-align:center;">
+                    <h2 style="color:var(--wrong);">💔 ¡Te has quedado sin vidas!</h2>
+                    <p style="font-size:14px;">Lograste acumular <strong>${puntos} puntos</strong>.</p>
+                    <p style="font-size:12px; color:var(--subtext);">Repasar las fichas de estudio te ayudará a no fallar la próxima vez.</p>
+                    <button class="btn-action" onclick="location.reload()">Reintentar Nivel 🔄</button>
                 </div>
             `;
         }
 
-        document.addEventListener('DOMContentLoaded', cargarPregunta);
+        function victoria() {
+            document.getElementById('main-card').innerHTML = `
+                <div style="text-align:center;">
+                    <h2 style="color:var(--correct);">🏆 ¡Excelente Trabajo!</h2>
+                    <p style="font-size:15px;">Puntaje Final: <strong>${puntos} pts</strong></p>
+                    <p style="font-size:13px; color:#a7f3d0;">Has completado los módulos de estudio y preguntas sobre el sistema muscular.</p>
+                    <button class="btn-action" onclick="location.reload()">Volver a Repasar 🔄</button>
+                </div>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', mostrarLeccion);
     </script>
 </body>
 </html>
