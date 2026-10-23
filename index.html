@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AnatoCosmiatría ESTÉTICA PRO Neon</title>
+    <!-- Librería para el efecto explosivo de confeti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg-dark: #05020a;
-            --card-bg: rgba(18, 10, 36, 0.92);
+            --card-bg: rgba(18, 10, 36, 0.94);
             --neon-pink: #ff007f;
             --neon-cyan: #00f0ff;
             --neon-green: #00ff87;
             --neon-purple: #8a2be2;
             --text-main: #ffffff;
             --text-sub: #cbd5e1;
-            --border: rgba(0, 240, 255, 0.25);
+            --border: rgba(0, 240, 255, 0.3);
             --gold: #ffb700;
         }
 
@@ -215,17 +217,17 @@
             background-color: rgba(10, 6, 26, 0.85);
             border-left: 4px solid var(--neon-cyan);
             border-radius: 12px;
-            padding: 12px;
+            padding: 14px;
             margin-top: 10px;
-            font-size: 12px;
-            line-height: 1.5;
+            font-size: 13px;
+            line-height: 1.55;
         }
 
         .info-title {
             font-weight: 900;
             color: var(--neon-pink);
-            font-size: 16px;
-            margin-bottom: 6px;
+            font-size: 17px;
+            margin-bottom: 8px;
             text-shadow: 0 0 8px var(--neon-pink);
         }
 
@@ -233,17 +235,18 @@
             background-color: rgba(255, 0, 127, 0.15);
             border: 1px solid var(--neon-pink);
             color: #ff75c3;
-            padding: 8px;
-            border-radius: 8px;
-            margin-top: 8px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-top: 10px;
             font-size: 12px;
+            line-height: 1.45;
         }
 
         .btn-opt {
             background-color: rgba(255, 255, 255, 0.06);
             color: var(--text-main);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 12px 14px;
+            padding: 13px 15px;
             border-radius: 12px;
             font-size: 13px;
             width: 100%;
@@ -301,10 +304,10 @@
                 <h1 class="app-title">AnatoCosmiatría</h1>
                 <span class="badge-pro">ESTÉTICA PRO</span>
             </div>
-            <p class="app-subtitle">Anatomía Muscular para Cosmetología, Cosmiatría y Estética Corporal</p>
+            <p class="app-subtitle">Anatomía Muscular Didáctica para Cosmiatría, Cosmetología y Estética</p>
 
             <div class="controls-bar">
-                <button class="btn-music" onclick="toggleMusica()">🎵 Música: <span id="music-state">OFF</span></button>
+                <button class="btn-music" onclick="toggleMusica()">🎵 Música Rítmica: <span id="music-state">OFF</span></button>
                 <div class="stats-bar">
                     <div class="stat-badge" style="color: var(--gold);">🏆 <span id="score-val">0</span></div>
                     <div class="stat-badge" style="color: var(--neon-pink);">🔥 <span id="streak-val">0</span></div>
@@ -314,17 +317,17 @@
         </header>
 
         <div class="nav-tabs-scroll">
-            <button class="tab-btn active" id="tab-explorador" onclick="cambiarModo('explorador')">🖐️ Explorador</button>
-            <button class="tab-btn" id="tab-trivias" onclick="cambiarModo('trivias')">🎓 Trivias (12 Prg)</button>
-            <button class="tab-btn" id="tab-ubicacion" onclick="cambiarModo('ubicacion')">🎯 Ubicación (12 Prg)</button>
-            <button class="tab-btn" id="tab-flashcards" onclick="cambiarModo('flashcards')">🎴 Flashcards (12 Prg)</button>
+            <button class="tab-btn active" id="tab-explorador" onclick="cambiarModo('explorador')">📖 Manual Didáctico</button>
+            <button class="tab-btn" id="tab-trivias" onclick="cambiarModo('trivias')">🎓 Trivias Cosmiátricas</button>
+            <button class="tab-btn" id="tab-ubicacion" onclick="cambiarModo('ubicacion')">🎯 Desafío Ubicación</button>
+            <button class="tab-btn" id="tab-flashcards" onclick="cambiarModo('flashcards')">🎴 Flashcards</button>
         </div>
 
         <div class="card" id="app-card"></div>
     </div>
 
     <script>
-        // SINTETIZADOR DE AUDIO Y MÚSICA DE FONDO
+        // SINTETIZADOR DE AUDIO Y MÚSICA ANIMADA
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let isMusicPlaying = false;
         let musicTimer = null;
@@ -335,46 +338,59 @@
             document.getElementById('music-state').innerText = isMusicPlaying ? 'ON 🎶' : 'OFF';
 
             if (isMusicPlaying) {
-                reproducirLoopMusica();
+                reproducirLoopMusicaAnimada();
             } else {
                 if (musicTimer) clearInterval(musicTimer);
             }
         }
 
-        function reproducirLoopMusica() {
-            const notas = [261.63, 293.66, 329.63, 392.00, 440.00];
+        function reproducirLoopMusicaAnimada() {
+            // Secuencia de bajos y melodía rítmica alegre
+            const secuencia = [261.63, 329.63, 392.00, 523.25, 392.00, 329.63, 293.66, 349.23];
             let i = 0;
             musicTimer = setInterval(() => {
                 if (!isMusicPlaying) return;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.value = notas[i % notas.length];
-                gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+                osc.type = 'triangle';
+                osc.frequency.value = secuencia[i % secuencia.length];
+                gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.28);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.4);
+                osc.stop(audioCtx.currentTime + 0.28);
                 i++;
-            }, 500);
+            }, 300); // Ritmo más rápido y animado
+        }
+
+        function lanzarConfeti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 60,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#ff007f', '#00f0ff', '#00ff87', '#ffb700', '#8a2be2']
+                });
+            }
         }
 
         function playSound(type) {
             if (audioCtx.state === 'suspended') audioCtx.resume();
             if (type === 'correct') {
+                lanzarConfeti(); // Papelitos volando
                 const notas = [523.25, 659.25, 783.99, 1046.50];
                 notas.forEach((freq, idx) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.07));
-                    gain.gain.setValueAtTime(0.15, audioCtx.currentTime + (idx * 0.07));
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.07) + 0.2);
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.06));
+                    gain.gain.setValueAtTime(0.18, audioCtx.currentTime + (idx * 0.06));
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.06) + 0.22);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + (idx * 0.07));
-                    osc.stop(audioCtx.currentTime + (idx * 0.07) + 0.2);
+                    osc.start(audioCtx.currentTime + (idx * 0.06));
+                    osc.stop(audioCtx.currentTime + (idx * 0.06) + 0.22);
                 });
             } else {
                 const osc = audioCtx.createOscillator();
@@ -390,14 +406,15 @@
             }
         }
 
-        // BASE DE DATOS COMPLETA: CARA, ABDOMEN, GLÚTEOS Y PIERNAS
+        // BASE DE DATOS PROFUNDA, EXTENSA Y DIDÁCTICA (APRENDIZAJE DESDE CERO)
         const baseAnatomica = {
             cara: [
                 {
-                    nombre: "Masetero",
-                    ubicacion: "Arco cigomático hasta el ángulo posterior de la mandíbula.",
-                    accion: "Potente elevador mandibular (masticación y oclusión).",
-                    aplicacion: "Hipertrofia por bruxismo y masajes descontracturantes faciales.",
+                    nombre: "Masetero (Músculo Masticador)",
+                    ubicacion: "Lateral posterior de la cara. Se extiende desde el pómulo (arco cigomático) hasta la mandíbula inferior.",
+                    accion: "Mapea la fuerza mandibular. Eleva la mandíbula al morder y masticar alimentos.",
+                    palpacion: "Aprieta las muelas firmemente y coloca tus dedos en la parte trasera del cachete: sentirás una bola dura y rígida.",
+                    aplicacion: "Tensión acumulada por bruxismo. Punto clave para masajes descontracturantes faciales, drenaje de la mandíbula y perfilado facial.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <rect x="58" y="50" width="14" height="22" rx="3" fill="#ff007f" stroke="#00ff87" stroke-width="1.5"/>
@@ -405,10 +422,11 @@
                     </svg>`
                 },
                 {
-                    nombre: "Orbicular de los Ojos",
-                    ubicacion: "Esfínter muscular circular alrededor de las órbitas oculares.",
-                    accion: "Cierra los párpados y promueve el drenaje lagrimal.",
-                    aplicacion: "Tratamiento de patas de gallo y drenaje linfático periocular.",
+                    nombre: "Orbicular de los Ojos (Músculo Periocular)",
+                    ubicacion: "Esfínter muscular completo en forma de anillo que rodea ambas órbitas oculares.",
+                    accion: "Cierra suave o fuertemente los párpados, promueve el parpadeo y facilita el flujo de las lágrimas.",
+                    palpacion: "Cierra los ojos con fuerza y coloca la yema de tus dedos sobre la sien y el párpado inferior.",
+                    aplicacion: "Formación de líneas de expresión 'patas de gallo'. Tratamiento esencial con drenaje linfático periocular, bolsas oculares y toxina botulínica.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <circle cx="42" cy="38" r="10" stroke="#ff007f" stroke-width="3" fill="none"/>
@@ -416,72 +434,85 @@
                     </svg>`
                 },
                 {
-                    nombre: "Cigomático Mayor",
-                    ubicacion: "Desde el hueso pómulo a la comisura labial.",
-                    accion: "Eleva la comisura labial (sonrisa).",
-                    aplicacion: "Lifting facial, prevención de surco nasogeniano y maderoterapia.",
+                    nombre: "Cigomático Mayor (Músculo de la Sonrisa)",
+                    ubicacion: "Se origina en el hueso cigomático (pómulo) y desciende diagonalmente hasta la comisura labial.",
+                    accion: "Tracciona la esquina de la boca hacia arriba y afuera al sonreír alegremente.",
+                    palpacion: "Sonríe marcando los pómulos y palpa la mejilla a mitad de camino entre la boca y la oreja.",
+                    aplicacion: "Lifting facial sin cirugía, prevención de la caída del tercio medio facial, reafirmación del surco nasogeniano y maderoterapia.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <path d="M 60 42 L 52 65" stroke="#ff007f" stroke-width="4" stroke-linecap="round"/>
                     </svg>`
                 },
                 {
-                    nombre: "Corrugador del Supercilio",
-                    ubicacion: "Zona medial del arco superciliar.",
-                    accion: "Frunce el ceño hacia adentro.",
-                    aplicacion: "Tratamiento de arrugas del entrecejo (líneas glabelares).",
+                    nombre: "Corrugador del Supercilio (Músculo del Entrecejo)",
+                    ubicacion: "Músculo pequeño y profundo ubicado justo encima del hueso de la ceja, en su extremo interno.",
+                    accion: "Arruga el entrecejo, juntando las dos cejas hacia la línea media en expresión de molestia o concentración.",
+                    palpacion: "Frunce el ceño mostrando enojo y palpa el inicio de la ceja cerca de la nariz.",
+                    aplicacion: "Líneas de expresión verticales glabelares. Diana primaria para relajantes musculares y alisado de la mirada.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <path d="M 38 32 Q 44 32 46 35 M 62 32 Q 56 32 54 35" stroke="#ff007f" stroke-width="4"/>
+                    </svg>`
+                },
+                {
+                    nombre: "Esternocleidomastoideo / ECOM (Músculo del Cuello)",
+                    ubicacion: "Potente cordón muscular en la pared anterolateral del cuello, desde el esternón y clavícula hasta detrás de la oreja.",
+                    accion: "Permite la rotación lateral de la cabeza, la inclinación y la flexión cervical.",
+                    palpacion: "Gira fuertemente la cabeza a un lado y palpa la banda diagonal que sobresale en tu cuello.",
+                    aplicacion: "Vía principal para la apertura de término y drenaje linfático facial y cervical. Tratamiento tensional de papada.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100">
+                        <path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
+                        <line x1="42" y1="55" x2="58" y2="78" stroke="#ff007f" stroke-width="5"/>
                     </svg>`
                 }
             ],
             corporal: [
                 {
-                    nombre: "Recto Abdominal",
-                    ubicacion: "Pared anterior del abdomen, dividido por la línea alba.",
-                    accion: "Flexión de tronco y compresión visceral.",
-                    aplicacion: "Electroestimulación (ondas rusas), cavitación y tratamiento de diástasis.",
+                    nombre: "Recto Abdominal (Músculo Frontal del Core)",
+                    ubicacion: "Cubre toda la pared anterior del abdomen verticalmente, dividido en metámeras por la línea alba.",
+                    accion: "Flexiona el tronco hacia adelante y comprime las vísceras para la postura.",
+                    aplicacion: "Tratamientos de reafirmación abdominal, electroestimulación con ondas rusas, marcaje y evaluación de diástasis abdominal.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <rect x="42" y="30" width="16" height="45" rx="3" fill="#ff007f" stroke="#00ff87" stroke-width="1.5"/>
                     </svg>`
                 },
                 {
-                    nombre: "Oblicuo Externo",
-                    ubicacion: "Pared anterolateral del abdomen y cintura.",
-                    accion: "Inclinación lateral y rotación del tronco.",
-                    aplicacion: "Masajes reductores de cintura, moldeo con maderoterapia y vacumterapia.",
+                    nombre: "Oblicuo Externo (Músculo de la Cintura)",
+                    ubicacion: "Ubicado en las paredes laterales e inferiores del abdomen y flancos.",
+                    accion: "Inclinación lateral y rotación de tronco. Ayuda a comprimir la pared abdominal.",
+                    aplicacion: "Protocolos reductores de cintura, moldeo con maderoterapia, vacumterapia y drenaje de adipocele lateral.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <path d="M 35 35 L 42 70 M 65 35 L 58 70" stroke="#ff007f" stroke-width="4"/>
                     </svg>`
                 },
                 {
-                    nombre: "Cuádriceps Femoral",
-                    ubicacion: "Cara anterior del muslo.",
-                    accion: "Extensión de rodilla y flexión de cadera.",
-                    aplicacion: "Masaje reductor de muslos, reafirmación tisular y drenaje de piernas cansadas.",
+                    nombre: "Cuádriceps Femoral (Músculo Anterior del Muslo)",
+                    ubicacion: "Ocupa toda la región anterior del muslo, compuesto por 4 vientres musculares.",
+                    accion: "Extensor principal de la rodilla y flexión de cadera.",
+                    aplicacion: "Masaje reductor de muslos, firmeza de la piel por encima de la rodilla, drenaje en piernas cansadas y celulitis anterior.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 10 L 70 10 L 65 90 L 35 90 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <rect x="38" y="25" width="24" height="50" rx="4" fill="#ff007f"/>
                     </svg>`
                 },
                 {
-                    nombre: "Glúteo Mayor",
-                    ubicacion: "Región posterior de la pelvis.",
-                    accion: "Extensión y rotación lateral de cadera.",
-                    aplicacion: "Levantamiento de glúteos, copas de succión, reafirmación y electroestimulación.",
+                    nombre: "Glúteo Mayor (Músculo de la Pelvis)",
+                    ubicacion: "Región posterior de la pelvis, formando la masa glútea principal.",
+                    accion: "Potente extensor y rotador externo de la cadera.",
+                    aplicacion: "Levantamiento de glúteos, copas de succión/vacumterapia, reafirmación con electroestimulación y mejora de la firmeza dermal.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <circle cx="40" cy="55" r="14" fill="#ff007f"/><circle cx="60" cy="55" r="14" fill="#ff007f"/>
                     </svg>`
                 },
                 {
-                    nombre: "Isquiotibiales (Bíceps Femoral)",
-                    ubicacion: "Cara posterior del muslo.",
-                    accion: "Flexión de rodilla y extensión de cadera.",
-                    aplicacion: "Tratamiento reductor de celulitis posterior, maderoterapia y moldeado.",
+                    nombre: "Isquiotibiales / Bíceps Femoral (Posterior del Muslo)",
+                    ubicacion: "Cara posterior del muslo, desde el isquión de la pelvis hasta la rodilla posterior.",
+                    accion: "Flexiona la rodilla y extiende la cadera hacia atrás.",
+                    aplicacion: "Zona clave de acumulación de PEFE (celulitis), maderoterapia reductora posterior y moldeado del pliegue subglúteo.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100">
                         <path d="M 30 10 L 70 10 L 65 90 L 35 90 Z" stroke="#00f0ff" stroke-width="2" fill="none"/>
                         <rect x="40" y="30" width="8" height="45" fill="#ff007f"/>
@@ -492,18 +523,16 @@
         };
 
         const triviasBanco = [
-            { q: "Al realizar un masaje reductor de cintura para moldear la silueta, ¿qué músculo lateral del abdomen trabajas principalmente?", opts: ["Oblicuo Externo", "Masetero", "Trapecio"], cor: 0, exp: "El Oblicuo Externo moldea los laterales de la cintura." },
-            { q: "Para un protocolo de reafirmación glútea con copas de succión y ondas rusas, ¿qué músculo principal se estimula?", opts: ["Glúteo Mayor", "Cuádriceps", "Frontal"], cor: 0, exp: "El Glúteo Mayor es el gran extensor y tonificador de la pelvis posterior." },
-            { q: "Al trabajar un tratamiento reductor de celulitis en la cara anterior del muslo, ¿sobre qué grupo muscular actúas?", opts: ["Cuádriceps Femoral", "Recto Abdominal", "Cigomático"], cor: 0, exp: "El Cuádriceps ocupa la pared anterior del muslo." },
-            { q: "En un protocolo de lifting facial para elevar pómulos, ¿qué músculo es fundamental estimular?", opts: ["Cigomático Mayor", "Masetero", "Isquiotibiales"], cor: 0, exp: "El Cigomático Mayor eleva las comisuras al sonreír." },
-            { q: "Para aliviar la tensión por bruxismo en la zona mandibular, ¿qué músculo se descontractura?", opts: ["Masetero", "Orbicular de los ojos", "Oblicuo"], cor: 0, exp: "El Masetero es el músculo elevador principal de la masticación." },
-            { q: "¿Qué músculo actúa como 'faja anatómica' profunda comprimiendo el abdomen en tratamientos reductores?", opts: ["Transverso del Abdomen", "Deltoides", "Glúteo"], cor: 0, exp: "El Transverso comprime la pared abdominal profunda." },
-            { q: "Al tratar celulitis en la zona posterior del muslo con maderoterapia, ¿qué grupo muscular se recorre?", opts: ["Isquiotibiales", "Frontal", "Pectoral"], cor: 0, exp: "Los Isquiotibiales se ubican en la parte posterior del muslo." },
-            { q: "¿Qué músculo orbicular rodea los ojos y es diana de tratamientos para patas de gallo?", opts: ["Orbicular de los Ojos", "Corrugador", "Masetero"], cor: 0, exp: "El Orbicular de los Ojos es el esfínter periocular." },
-            { q: "Al aplicar electroestimulación en el abdomen para marcar la línea alba, ¿qué músculo trabaja?", opts: ["Recto Abdominal", "Cuádriceps", "ECOM"], cor: 0, exp: "El Recto Abdominal flexiona el tronco y marca el abdomen." },
-            { q: "Para un masaje descontracturante en cuello y drenaje linfático, ¿qué músculo guía la zona anterolateral?", opts: ["Esternocleidomastoideo (ECOM)", "Glúteo", "Oblicuo"], cor: 0, exp: "El ECOM recorre diagonalmente el cuello." },
-            { q: "¿Qué músculo del entrecejo se frunce al concentrarse generando líneas verticales?", opts: ["Corrugador del Supercilio", "Risorio", "Deltoides"], cor: 0, exp: "El Corrugador junta las cejas hacia la línea media." },
-            { q: "Al realizar un masaje reductor en hombros y cúpula del brazo, ¿qué músculo se estimula?", opts: ["Deltoides", "Bucinador", "Masetero"], cor: 0, exp: "El Deltoides forma el capuchón del hombro." }
+            { q: "¿Qué músculo lateral de la cintura se trabaja en los masajes reductores para afinar la silueta?", opts: ["Oblicuo Externo", "Masetero", "Trapecio"], cor: 0, exp: "El Oblicuo Externo moldea los flancos laterales de la cintura." },
+            { q: "Para levantar y reafirmar la masa posterior de la pelvis con copas de succión, ¿qué músculo estimulas?", opts: ["Glúteo Mayor", "Cuádriceps", "Frontal"], cor: 0, exp: "El Glúteo Mayor es el gran extensor y tonificador de la pelvis." },
+            { q: "En un tratamiento reductor de celulitis en la cara anterior del muslo, ¿qué músculo recorres?", opts: ["Cuádriceps Femoral", "Recto Abdominal", "Cigomático"], cor: 0, exp: "El Cuádriceps ocupa toda la cara anterior del muslo." },
+            { q: "Al realizar un lifting facial para elevar pómulos y prevenir la flacidez de comisuras, ¿qué músculo tratas?", opts: ["Cigomático Mayor", "Masetero", "Isquiotibiales"], cor: 0, exp: "El Cigomático Mayor eleva la esquina de la boca al sonreír." },
+            { q: "Para un masaje descontracturante por apretar los molares (bruxismo), ¿sobre qué músculo trabajas?", opts: ["Masetero", "Orbicular de los ojos", "Oblicuo"], cor: 0, exp: "El Masetero es el músculo elevador principal de la mandíbula." },
+            { q: "Al tratar celulitis en la zona posterior del muslo con maderoterapia, ¿qué músculo masajeas?", opts: ["Isquiotibiales", "Frontal", "Pectoral"], cor: 0, exp: "Los Isquiotibiales se ubican en la parte posterior del muslo." },
+            { q: "¿Qué músculo orbicular rodea las órbitas oculares produciendo las patas de gallo?", opts: ["Orbicular de los Ojos", "Corrugador", "Masetero"], cor: 0, exp: "El Orbicular de los Ojos es el esfínter periocular." },
+            { q: "Al aplicar electroestimulación en el abdomen para tonificar la línea alba, ¿qué músculo se activa?", opts: ["Recto Abdominal", "Cuádriceps", "ECOM"], cor: 0, exp: "El Recto Abdominal flexiona el tronco y marca la pared anterior." },
+            { q: "Para un drenaje linfático de rostro y cuello, ¿qué músculo guía la vía anterolateral?", opts: ["Esternocleidomastoideo (ECOM)", "Glúteo", "Oblicuo"], cor: 0, exp: "El ECOM recorre diagonalmente el cuello sirviendo de guía." },
+            { q: "¿Qué músculo del entrecejo junta las cejas generando arrugas verticales de molestia?", opts: ["Corrugador del Supercilio", "Risorio", "Deltoides"], cor: 0, exp: "El Corrugador atrae la ceja hacia la línea media." }
         ];
 
         let puntos = 0;
@@ -515,6 +544,7 @@
         let iUbi = 0;
         let iFlash = 0;
         let respondido = false;
+        let preguntasFallidas = [];
 
         function actualizarBarra() {
             document.getElementById('score-val').innerText = puntos;
@@ -537,14 +567,14 @@
             if(modo === 'flashcards') { iFlash = 0; renderFlashcards(); }
         }
 
-        // MODO 1: EXPLORADOR
+        // MODO 1: EXPLORADOR DIDÁCTICO
         function renderExplorador() {
             const card = document.getElementById('app-card');
             const lista = baseAnatomica[subZona];
 
             let html = `
-                <div class="card-header-title">🖐️ Explorador Muscular Cosmiátrico</div>
-                <div class="card-desc">Selecciona una región y un músculo para revisar su aplicación reductora, reafirmante o facial.</div>
+                <div class="card-header-title">📖 Manual Didáctico de Anatomía</div>
+                <div class="card-desc">Selecciona una zona y explora paso a paso cómo reconocer cada músculo y su aplicación en estética:</div>
 
                 <div class="region-selector">
                     <button class="btn-region ${subZona==='cara'?'active':''}" onclick="subZona='cara'; renderExplorador();">🌸 Cara y Cuello</button>
@@ -557,13 +587,14 @@
             `;
 
             lista.forEach((m, idx) => {
-                html += `<button class="btn-region" onclick="verDetalleExplorador(${idx})">🔹 ${m.nombre}</button>`;
+                html += `<button class="btn-region" onclick="verDetalleExplorador(${idx})">🔹 ${m.nombre.split(' ')[0]}</button>`;
             });
 
             html += `</div><div class="info-panel" id="explorador-detail">
                 <div class="info-title">${lista[0].nombre}</div>
-                <strong>📍 Ubicación:</strong> ${lista[0].ubicacion}<br>
-                <strong>⚙️ Acción:</strong> ${lista[0].accion}
+                <strong>📍 Ubicación Anatómica:</strong> ${lista[0].ubicacion}<br>
+                <strong>⚙️ Biomecánica:</strong> ${lista[0].accion}<br>
+                <strong>🤚 Palpación Corporal:</strong> ${lista[0].palpacion}
                 <div class="badge-cosmiatria">✨ <strong>Aplicación Estética / Reductora:</strong><br>${lista[0].aplicacion}</div>
             </div>`;
 
@@ -575,20 +606,21 @@
             document.querySelector('.graphic-container').innerHTML = m.svg;
             document.getElementById('explorador-detail').innerHTML = `
                 <div class="info-title">${m.nombre}</div>
-                <strong>📍 Ubicación:</strong> ${m.ubicacion}<br>
-                <strong>⚙️ Acción:</strong> ${m.accion}
+                <strong>📍 Ubicación Anatómica:</strong> ${m.ubicacion}<br>
+                <strong>⚙️ Biomecánica:</strong> ${m.accion}<br>
+                <strong>🤚 Palpación Corporal:</strong> ${m.palpacion}
                 <div class="badge-cosmiatria">✨ <strong>Aplicación Estética / Reductora:</strong><br>${m.aplicacion}</div>
             `;
         }
 
-        // MODO 2: TRIVIAS (12 PREGUNTAS)
+        // MODO 2: TRIVIAS DIDÁCTICAS CON CONFETI Y RECUPERACIÓN
         function renderTrivias() {
             respondido = false;
             const card = document.getElementById('app-card');
             const q = triviasBanco[iTrivia % triviasBanco.length];
 
             let html = `
-                <div class="card-header-title">🎓 Trivia Cosmiátrica (${iTrivia + 1} de ${triviasBanco.length})</div>
+                <div class="card-header-title">🎓 Trivia Didáctica (${iTrivia + 1} de ${triviasBanco.length})</div>
                 <div class="card-desc">${q.q}</div>
             `;
 
@@ -612,11 +644,11 @@
             const q = triviasBanco[iTrivia % triviasBanco.length];
 
             if(correcto) {
-                playSound('correct');
+                playSound('correct'); // Lanza confeti + sonido alegre
                 btn.classList.add('correct');
                 puntos += 100; racha++;
                 if (racha % 3 === 0 && vidas < 3) vidas++;
-                fb.innerHTML = `<span style='color:var(--neon-green); font-weight:bold;'>¡Correcto! 🎉</span><br>${q.exp}`;
+                fb.innerHTML = `<span style='color:var(--neon-green); font-weight:bold;'>¡EXCELENTE! 🎉</span><br>${q.exp}`;
             } else {
                 playSound('wrong');
                 btn.classList.add('wrong');
@@ -634,7 +666,7 @@
             renderTrivias();
         }
 
-        // MODO 3: DESAFÍO UBICACIÓN (12 PREGUNTAS)
+        // MODO 3: DESAFÍO UBICACIÓN
         function renderUbicacion() {
             respondido = false;
             const card = document.getElementById('app-card');
@@ -643,13 +675,13 @@
 
             let html = `
                 <div class="card-header-title">🎯 Desafío Ubicación (${iUbi + 1} de ${todos.length})</div>
-                <div class="card-desc">Observa el diagrama neón y selecciona el músculo resaltado:</div>
+                <div class="card-desc">Observa el esquema anatómico y reconoce el músculo destacado en rosa:</div>
 
                 <div class="graphic-container">${item.svg}</div>
 
                 <button class="btn-opt" onclick="evaluarUbi('${item.nombre}', '${item.nombre}', this)">${item.nombre}</button>
-                <button class="btn-opt" onclick="evaluarUbi('Incorrecto1', '${item.nombre}', this)">Deltoides</button>
-                <button class="btn-opt" onclick="evaluarUbi('Incorrecto2', '${item.nombre}', this)">Trapecio</button>
+                <button class="btn-opt" onclick="evaluarUbi('Incorrecto1', '${item.nombre}', this)">Músculo Genérico A</button>
+                <button class="btn-opt" onclick="evaluarUbi('Incorrecto2', '${item.nombre}', this)">Músculo Genérico B</button>
 
                 <div id="fb-ubi" style="margin-top:10px; font-size:13px; display:none;"></div>
                 <button class="btn-next" id="btn-next-ub" style="display:none;" onclick="iUbi++; renderUbicacion();">Siguiente Ubicación ➔</button>
@@ -679,7 +711,7 @@
             document.getElementById('btn-next-ub').style.display = 'block';
         }
 
-        // MODO 4: FLASHCARDS (12 PREGUNTAS)
+        // MODO 4: FLASHCARDS
         function renderFlashcards() {
             respondido = false;
             const card = document.getElementById('app-card');
@@ -687,8 +719,8 @@
             const item = todos[iFlash % todos.length];
 
             let html = `
-                <div class="card-header-title">🎴 Flashcards (${iFlash + 1} de ${todos.length})</div>
-                <div class="card-desc">Identifica la tarjeta técnica anatómica:</div>
+                <div class="card-header-title">🎴 Flashcards Didácticas (${iFlash + 1} de ${todos.length})</div>
+                <div class="card-desc">Observa la tarjeta técnica e identifica la anatomía:</div>
 
                 <div class="flashcard-box">${item.svg}</div>
 
@@ -712,7 +744,7 @@
                 playSound('correct');
                 btn.classList.add('correct');
                 puntos += 100; racha++;
-                fb.innerHTML = `<span style='color:var(--neon-green); font-weight:bold;'>¡Acertaste!</span>`;
+                fb.innerHTML = `<span style='color:var(--neon-green); font-weight:bold;'>¡Acertaste la tarjeta! 🎉</span>`;
             } else {
                 playSound('wrong');
                 btn.classList.add('wrong');
