@@ -179,14 +179,14 @@
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .btn-region {
             background-color: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid var(--border);
-            padding: 8px 10px;
+            padding: 6px 10px;
             border-radius: 10px;
             font-size: 11px;
             font-weight: 700;
@@ -318,16 +318,16 @@
 
         <div class="nav-tabs-scroll">
             <button class="tab-btn active" id="tab-explorador" onclick="cambiarModo('explorador')">📖 Manual de Músculos</button>
-            <button class="tab-btn" id="tab-trivias" onclick="cambiarModo('trivias')">🎓 Reto Cosmiátrico</button>
-            <button class="tab-btn" id="tab-ubicacion" onclick="cambiarModo('ubicacion')">🎯 Desafío Ubicación</button>
-            <button class="tab-btn" id="tab-flashcards" onclick="cambiarModo('flashcards')">🎴 Flashcards</button>
+            <button class="tab-btn" id="tab-trivias" onclick="cambiarModo('trivias')">🎓 Reto (15 Prg)</button>
+            <button class="tab-btn" id="tab-ubicacion" onclick="cambiarModo('ubicacion')">🎯 Ubicación (15 Prg)</button>
+            <button class="tab-btn" id="tab-flashcards" onclick="cambiarModo('flashcards')">🎴 Flashcards (15 Prg)</button>
         </div>
 
         <div class="card" id="app-card"></div>
     </div>
 
     <script>
-        // SINTETIZADOR Y MÚSICA ANIMADA POP/SYNTH
+        // SINTETIZADOR DE AUDIO Y MÚSICA ANIMADA
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         let isMusicPlaying = false;
         let musicTimer = null;
@@ -345,7 +345,6 @@
         }
 
         function reproducirLoopMusicaAlegre() {
-            // Arpegio electrónico animado
             const notas = [261.63, 329.63, 392.00, 523.25, 440.00, 349.23, 392.00, 523.25];
             let i = 0;
             musicTimer = setInterval(() => {
@@ -406,24 +405,24 @@
             }
         }
 
-        // BANCO DE DATOS MASIVO ANATÓMICO Y COSMIÁTRICO
+        // BASE DE DATOS COMPLETA: CARA, CUELLO, ABDOMEN, BRAZOS Y PIERNAS
         const baseAnatomica = {
             cara: [
                 {
-                    nombre: "Masetero (Músculo Masticador)",
-                    ubicacion: "Arco cigomático (pómulo) hasta el ángulo posterior mandibular.",
+                    nombre: "Masetero (Masticador)",
+                    ubicacion: "Arco cigomático (pómulo) hasta el ángulo posterior de la mandíbula.",
                     accion: "Potente elevación mandibular para la masticación.",
                     palpacion: "Aprieta las muelas y palpa la masa rígida en el ángulo mandibular.",
                     aplicacion: "Tensión por bruxismo. Masaje descontracturante facial y drenaje hacia ganglios submandibulares.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="58" y="50" width="14" height="22" rx="3" fill="#ff007f" stroke="#00ff87" stroke-width="1.5"/></svg>`
                 },
                 {
-                    nombre: "Esternocleidomastoideo / ECOM (Cuello)",
-                    ubicacion: "Anterolateral del cuello, desde esternón/clavícula a la apófisis mastoides.",
-                    accion: "Rotación e inclinación cervical.",
-                    palpacion: "Gira la cabeza a un lado y palpa el cordón muscular grueso que resalta.",
-                    aplicacion: "Guía fundamental para la apertura de terminus y Drenaje Linfático Facial y Cervical.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><line x1="42" y1="55" x2="58" y2="78" stroke="#ff007f" stroke-width="5"/></svg>`
+                    nombre: "Temporal (Masticación)",
+                    ubicacion: "Fosa temporal en el lateral del cráneo hasta la mandíbula.",
+                    accion: "Eleva y retrae la mandíbula.",
+                    palpacion: "Aprieta los dientes y toca tu sien: sentirás la contracción.",
+                    aplicacion: "Punto tensional de cefaleas por bruxismo y masaje relajante craneofacial.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 38 20 C 50 15 65 20 62 38 Z" fill="#ff007f"/></svg>`
                 },
                 {
                     nombre: "Orbicular de los Ojos (Periocular)",
@@ -442,19 +441,45 @@
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 60 42 L 52 65" stroke="#ff007f" stroke-width="4" stroke-linecap="round"/></svg>`
                 },
                 {
+                    nombre: "Corrugador del Supercilio (Entrecejo)",
+                    ubicacion: "Sobre el hueso superciliar, extremo interno de la ceja.",
+                    accion: "Junta las cejas hacia adentro frunciendo el ceño.",
+                    palpacion: "Frunce el ceño y palpa el inicio interno de la ceja.",
+                    aplicacion: "Alisado de arrugas glabelares verticales y toxina botulínica.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 38 32 Q 44 32 46 35 M 62 32 Q 56 32 54 35" stroke="#ff007f" stroke-width="4"/></svg>`
+                },
+                {
+                    nombre: "Frontal (Frente)",
+                    ubicacion: "Pared anterior de la frente.",
+                    accion: "Eleva las cejas y arruga la frente transversalmente.",
+                    palpacion: "Mira hacia arriba sorprendida y palpa las líneas de tu frente.",
+                    aplicacion: "Relajación de líneas horizontales de expresión y masaje tensor.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 Q 75 45 68 75 Q 50 90 32 75 Q 25 45 30 15 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 35 22 Q 50 18 65 22" stroke="#ff007f" stroke-width="5"/></svg>`
+                }
+            ],
+            cuello: [
+                {
+                    nombre: "Esternocleidomastoideo / ECOM",
+                    ubicacion: "Anterolateral del cuello, de esternón/clavícula a mastoides.",
+                    accion: "Rotación e inclinación cervical.",
+                    palpacion: "Gira la cabeza a un lado y palpa el cordón muscular que resalta.",
+                    aplicacion: "Guía fundamental para apertura de terminus y Drenaje Linfático Facial y Cervical.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><line x1="42" y1="55" x2="58" y2="78" stroke="#ff007f" stroke-width="5"/></svg>`
+                },
+                {
                     nombre: "Platisma (Cuello & Escote)",
-                    ubicacion: "Músculo subcutáneo ancho en la parte anterior del cuello hasta el mentón.",
-                    accion: "Tensa la piel del cuello y desciende la comisura labial.",
-                    palpacion: "Enseña los molares inferiores tensando el cuello.",
-                    aplicacion: "Tratamiento de bandas platismales, flacidez del cuello y escote en radiofrecuencia.",
+                    ubicacion: "Músculo subcutáneo ancho del cuello hasta la mandíbula.",
+                    accion: "Tensa la piel del cuello y baja la comisura labial.",
+                    palpacion: "Muestra los dientes inferiores tensando el cuello.",
+                    aplicacion: "Flacidez del cuello (bandas platismales) y firmeza con radiofrecuencia.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 15 Q 50 8 70 15 L 65 85 L 35 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 35 60 L 65 60 L 60 80 L 40 80 Z" fill="#ff007f"/></svg>`
                 }
             ],
-            corporal: [
+            abdomen: [
                 {
                     nombre: "Recto Abdominal (Core)",
-                    ubicacion: "Pared anterior del abdomen, a lo largo de la línea alba.",
-                    accion: "Flexión de tronco y sostén de la cavidad abdominal.",
+                    ubicacion: "Pared anterior del abdomen a lo largo de la línea alba.",
+                    accion: "Flexión de tronco y sostén visceral.",
                     palpacion: "Haz un abdominal corto y palpa la pared muscular anterior.",
                     aplicacion: "Electroestimulación con ondas rusas, marcaje y evaluación de diástasis abdominal.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="42" y="30" width="16" height="45" rx="3" fill="#ff007f" stroke="#00ff87" stroke-width="1.5"/></svg>`
@@ -463,10 +488,46 @@
                     nombre: "Oblicuo Externo (Cintura)",
                     ubicacion: "Pared anterolateral del abdomen y flancos.",
                     accion: "Inclinación lateral y moldeo de la cintura.",
-                    palpacion: "Inclínate hacia un lado y palpa el lateral de tu abdomen.",
+                    palpacion: "Inclínate a un lado y palpa el lateral de tu abdomen.",
                     aplicacion: "Masaje reductor de cintura, vacumterapia, cavitación y maderoterapia.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 35 35 L 42 70 M 65 35 L 58 70" stroke="#ff007f" stroke-width="4"/></svg>`
                 },
+                {
+                    nombre: "Transverso del Abdomen",
+                    ubicacion: "Capa profunda abdominal (faja natural).",
+                    accion: "Compresión visceral y soporte lumbar.",
+                    palpacion: "Mete el ombligo hacia la columna sin mover la espalda.",
+                    aplicacion: "Gimnasia hipopresiva, tonificación profunda y faja reductora natural.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 35 15 L 65 15 L 60 85 L 40 85 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="38" y="45" width="24" height="15" fill="#ff007f"/></svg>`
+                }
+            ],
+            brazos: [
+                {
+                    nombre: "Deltoides (Hombros)",
+                    ubicacion: "Cúpula superior de la articulación del hombro.",
+                    accion: "Abducción del brazo (elevación lateral).",
+                    palpacion: "Levanta el brazo lateralmente a 90°.",
+                    aplicacion: "Tonificación corporal, reafirmación de hombros y postura del escote.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 22 25 Q 32 15 38 25 L 28 48 Z" fill="#ff007f"/></svg>`
+                },
+                {
+                    nombre: "Bíceps Braquial (Brazo Anterior)",
+                    ubicacion: "Cara anterior del brazo.",
+                    accion: "Flexión de codo y supinación.",
+                    palpacion: "Dobla el codo a 90° haciendo fuerza.",
+                    aplicacion: "Tratamientos reafirmantes para flacidez del brazo (alas de murciélago).",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="25" y="40" width="8" height="25" fill="#ff007f"/></svg>`
+                },
+                {
+                    nombre: "Tríceps Braquial (Brazo Posterior)",
+                    ubicacion: "Cara posterior del brazo.",
+                    accion: "Extensión de codo.",
+                    palpacion: "Empuja el brazo estirado hacia atrás.",
+                    aplicacion: "Zona primaria de flacidez dermoepidérmica, radiofrecuencia y electroestimulación.",
+                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="67" y="40" width="8" height="25" fill="#ff007f"/></svg>`
+                }
+            ],
+            piernas: [
                 {
                     nombre: "Cuádriceps Femoral (Muslo Anterior)",
                     ubicacion: "Toda la cara anterior del muslo.",
@@ -476,7 +537,7 @@
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 10 L 70 10 L 65 90 L 35 90 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="38" y="25" width="24" height="50" rx="4" fill="#ff007f"/></svg>`
                 },
                 {
-                    nombre: "Glúteo Mayor (Pelvis)",
+                    nombre: "Glúteo Mayor (Pelvis Posterior)",
                     ubicacion: "Masa posterior de la pelvis.",
                     accion: "Extensión y rotación lateral de cadera.",
                     palpacion: "Extiende la pierna hacia atrás y palpa el glúteo.",
@@ -490,27 +551,26 @@
                     palpacion: "Dobla la rodilla hacia atrás intentando tocar el glúteo.",
                     aplicacion: "Tratamiento reductor de celulitis posterior y moldeado del pliegue subglúteo.",
                     svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 10 L 70 10 L 65 90 L 35 90 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><rect x="40" y="30" width="8" height="45" fill="#ff007f"/><rect x="52" y="30" width="8" height="45" fill="#ff007f"/></svg>`
-                },
-                {
-                    nombre: "Deltoides (Hombros)",
-                    ubicacion: "Cúpula superior del hombro.",
-                    accion: "Abducción del brazo.",
-                    palpacion: "Levanta el brazo lateralmente a 90°.",
-                    aplicacion: "Tonificación corporal, reafirmación de hombros y postura del escote.",
-                    svg: `<svg width="140" height="140" viewBox="0 0 100 100"><path d="M 30 20 L 70 20 L 75 80 L 25 80 Z" stroke="#00f0ff" stroke-width="2" fill="none"/><path d="M 22 25 Q 32 15 38 25 L 28 48 Z" fill="#ff007f"/></svg>`
                 }
             ]
         };
 
         const triviasBanco = [
-            { q: "Al realizar Drenaje Linfático Facial y Cervical, ¿qué músculo sirve de guía anterolateral para dirigir la linfa hacia los ganglios de terminus?", opts: ["Esternocleidomastoideo (ECOM)", "Glúteo Mayor", "Recto Abdominal"], cor: 0, exp: "El ECOM recorre diagonalmente el cuello y sirve de guía directa para las maniobras de Drenaje Linfático." },
+            { q: "Al realizar Drenaje Linfático Facial y Cervical, ¿qué músculo sirve de guía anterolateral para dirigir la linfa hacia los ganglios de terminus?", opts: ["Esternocleidomastoideo (ECOM)", "Glúteo Mayor", "Recto Abdominal"], cor: 0, exp: "El ECOM recorre diagonalmente el cuello y sirve de guía directa para el Drenaje Linfático." },
             { q: "En un protocolo reductor de cintura con maderoterapia y vacumterapia, ¿qué músculo de los flancos estimulas?", opts: ["Oblicuo Externo", "Masetero", "Deltoides"], cor: 0, exp: "El Oblicuo Externo moldea la pared lateral de la cintura." },
             { q: "Para un lifting facial sin cirugía que eleve pómulos y suavice el surco nasogeniano, ¿qué músculo tratas?", opts: ["Cigomático Mayor", "Temporal", "Cuádriceps"], cor: 0, exp: "El Cigomático Mayor eleva la comisura labial hacia el pómulo." },
             { q: "En el tratamiento del bruxismo y tensión en la mandíbula, ¿qué músculo se descontractura?", opts: ["Masetero", "Orbicular de los Ojos", "Isquiotibiales"], cor: 0, exp: "El Masetero es el elevador mandibular más potente." },
             { q: "Para levantar y tonificar la masa posterior de la pelvis con copas de succión, ¿qué músculo se trabaja?", opts: ["Glúteo Mayor", "Frontal", "Pectoral"], cor: 0, exp: "El Glúteo Mayor es el gran extensor y firmeza de la cadera posterior." },
             { q: "Al realizar un drenaje de piernas cansadas y celulitis anterior del muslo, ¿qué músculo recorres?", opts: ["Cuádriceps Femoral", "Platisma", "ECOM"], cor: 0, exp: "El Cuádriceps ocupa la pared anterior del muslo." },
-            { q: "En el tratamiento de la celulitis posterior con maderoterapia debajo del pliegue glúteo, ¿qué grupo muscular estimulas?", opts: ["Isquiotibiales", "Masetero", "Recto Abdominal"], cor: 0, exp: "Los Isquiotibiales se extienden en la cara posterior del muslo." },
-            { q: "Al aplicar ondas rusas para marcar la pared anterior del abdomen, ¿qué músculo se activa?", opts: ["Recto Abdominal", "Deltoides", "Orbicular"], cor: 0, exp: "El Recto Abdominal flexiona el tronco y define la pared abdominal anterior." }
+            { q: "En el tratamiento de la flacidez del brazo en la cara posterior (alas de murciélago), ¿qué músculo tratas?", opts: ["Tríceps Braquial", "Risorio", "Recto Abdominal"], cor: 0, exp: "El Tríceps se ubica en la cara posterior del brazo." },
+            { q: "Al trabajar la capa profunda del abdomen como faja reductora natural, ¿qué músculo ejercitas?", opts: ["Transverso del Abdomen", "Deltoides", "Temporal"], cor: 0, exp: "El Transverso comprimiendo las vísceras actúa como faja anatómica." },
+            { q: "Para un masaje relajante craneofacial por tensión en las sienes, ¿qué músculo de la masticación masajeas?", opts: ["Temporal", "Cuádriceps", "Oblicuo"], cor: 0, exp: "El músculo Temporal ocupa la fosa lateral del cráneo." },
+            { q: "Al tratar celulitis en la zona posterior del muslo con maderoterapia debajo del pliegue glúteo, ¿qué músculo estimulas?", opts: ["Isquiotibiales", "Masetero", "Pectoral"], cor: 0, exp: "Los Isquiotibiales se extienden en la cara posterior del muslo." },
+            { q: "Al aplicar ondas rusas para marcar la pared anterior del abdomen, ¿qué músculo se activa?", opts: ["Recto Abdominal", "Deltoides", "Orbicular"], cor: 0, exp: "El Recto Abdominal flexiona el tronco y define la pared anterior." },
+            { q: "Al tratar líneas verticales del entrecejo con masajes tensores, ¿qué músculo fruncidor relajas?", opts: ["Corrugador del Supercilio", "Glúteo", "Bíseps"], cor: 0, exp: "El Corrugador atrae la ceja hacia la línea media." },
+            { q: "Para reafirmar la piel flácida del cuello y escote en radiofrecuencia, ¿qué músculo subcutáneo tratas?", opts: ["Platisma", "Masetero", "Cuádriceps"], cor: 0, exp: "El Platisma recubre la cara anterior del cuello." },
+            { q: "En la tonificación del contorno superior del hombro con electroestimulación, ¿qué músculo se activa?", opts: ["Deltoides", "Risorio", "ECOM"], cor: 0, exp: "El Deltoides forma la cúpula muscular del hombro." },
+            { q: "Al tratar arrugas perioculares 'patas de gallo' con drenaje, ¿qué músculo esfínter masajeas?", opts: ["Orbicular de los Ojos", "Oblicuo", "Tríceps"], cor: 0, exp: "El Orbicular de los Ojos rodea por completo las órbitas." }
         ];
 
         let puntos = 0;
@@ -554,8 +614,11 @@
                 <div class="card-desc">Selecciona una zona corporal o facial para estudiar la ubicación, palpación y drenaje/tratamiento estético:</div>
 
                 <div class="region-selector">
-                    <button class="btn-region ${subZona==='cara'?'active':''}" onclick="subZona='cara'; renderExplorador();">🌸 Cara y Cuello</button>
-                    <button class="btn-region ${subZona==='corporal'?'active':''}" onclick="subZona='corporal'; renderExplorador();">🦵 Abdomen, Glúteos y Piernas</button>
+                    <button class="btn-region ${subZona==='cara'?'active':''}" onclick="subZona='cara'; renderExplorador();">🌸 Cara</button>
+                    <button class="btn-region ${subZona==='cuello'?'active':''}" onclick="subZona='cuello'; renderExplorador();">🦒 Cuello</button>
+                    <button class="btn-region ${subZona==='abdomen'?'active':''}" onclick="subZona='abdomen'; renderExplorador();">🧍 Abdomen</button>
+                    <button class="btn-region ${subZona==='brazos'?'active':''}" onclick="subZona='brazos'; renderExplorador();">💪 Brazos</button>
+                    <button class="btn-region ${subZona==='piernas'?'active':''}" onclick="subZona='piernas'; renderExplorador();">🦵 Piernas</button>
                 </div>
 
                 <div class="graphic-container">${lista[0].svg}</div>
@@ -643,11 +706,11 @@
             renderTrivias();
         }
 
-        // MODO 3: DESAFÍO UBICACIÓN
+        // MODO 3: DESAFÍO UBICACIÓN (15 PREGUNTAS)
         function renderUbicacion() {
             respondido = false;
             const card = document.getElementById('app-card');
-            const todos = [...baseAnatomica.cara, ...baseAnatomica.corporal];
+            const todos = [...baseAnatomica.cara, ...baseAnatomica.cuello, ...baseAnatomica.abdomen, ...baseAnatomica.brazos, ...baseAnatomica.piernas];
             const item = todos[iUbi % todos.length];
 
             let html = `
@@ -688,11 +751,11 @@
             document.getElementById('btn-next-ub').style.display = 'block';
         }
 
-        // MODO 4: FLASHCARDS
+        // MODO 4: FLASHCARDS (15 PREGUNTAS)
         function renderFlashcards() {
             respondido = false;
             const card = document.getElementById('app-card');
-            const todos = [...baseAnatomica.cara, ...baseAnatomica.corporal];
+            const todos = [...baseAnatomica.cara, ...baseAnatomica.cuello, ...baseAnatomica.abdomen, ...baseAnatomica.brazos, ...baseAnatomica.piernas];
             const item = todos[iFlash % todos.length];
 
             let html = `
