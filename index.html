@@ -3,115 +3,317 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Juego Sistema Muscular</title>
+    <title>AnatoMaster Pro - Sistema Muscular</title>
     <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #e11d48;
+            --accent-hover: #be123c;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border: #334155;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #0f172a;
-            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
             text-align: center;
-            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #fb7185;
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        p.subtitle {
+            color: var(--text-sub);
+            font-size: 13px;
             margin: 0;
         }
-        h1 { color: #fb7185; margin-bottom: 5px; }
-        p { color: #cbd5e1; font-size: 14px; }
+
+        .zones-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            max-width: 500px;
+        }
+
         .btn-zone {
-            background-color: #e11d48;
+            background-color: var(--accent);
             color: white;
             border: none;
-            padding: 12px 20px;
-            margin: 5px;
+            padding: 10px 14px;
             border-radius: 8px;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
+            transition: background 0.2s;
         }
-        .btn-zone:active { background-color: #be123c; }
+
+        .btn-zone:active, .btn-zone.active {
+            background-color: var(--accent-hover);
+            box-shadow: 0 0 8px rgba(225, 29, 72, 0.5);
+        }
+
         .card {
-            background-color: #1e293b;
-            border: 1px solid #334155;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
+            padding: 18px;
+            width: 100%;
+            max-width: 480px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
-        .muscle-btn {
+
+        .muscle-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .btn-muscle {
             background-color: #334155;
-            color: #f1f5f9;
+            color: #e2e8f0;
             border: 1px solid #475569;
-            padding: 8px 12px;
-            margin: 4px;
+            padding: 6px 10px;
             border-radius: 6px;
             font-size: 12px;
             cursor: pointer;
         }
-        .muscle-btn:hover { background-color: #e11d48; }
-        #muscle-title { color: #fda4af; margin-bottom: 10px; }
+
+        .btn-muscle.active {
+            background-color: #f43f5e;
+            color: white;
+            border-color: #fb7185;
+        }
+
+        .info-box h2 {
+            color: #fda4af;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #38bdf8;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .badge-estetica {
+            background-color: #831843;
+            color: #fbcfe8;
+            border: 1px solid #9d174d;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
 
-    <h1>AnatoMaster Pro</h1>
-    <p>Cosmiatría & Estética Corporal</p>
+    <header>
+        <h1>AnatoMaster Pro</h1>
+        <p class="subtitle">Guía Interactiva de Anatomía para Cosmiatría</p>
+    </header>
 
-    <div style="margin-top: 15px;">
-        <button class="btn-zone" onclick="cargarZona('cara')">Cara y Cuello</button>
-        <button class="btn-zone" onclick="cargarZona('abdomen')">Abdomen & Torso</button>
+    <!-- Botones de Regiones Anatómicas -->
+    <div class="zones-container">
+        <button class="btn-zone" onclick="seleccionarZona('cara', this)">Facial</button>
+        <button class="btn-zone" onclick="seleccionarZona('cuello', this)">Cuello & Escote</button>
+        <button class="btn-zone" onclick="seleccionarZona('torso', this)">Abdomen & Tórax</button>
+        <button class="btn-zone" onclick="seleccionarZona('espalda', this)">Espalda</button>
+        <button class="btn-zone" onclick="seleccionarZona('extremidades', this)">Brazos & Piernas</button>
     </div>
 
+    <!-- Tarjeta Principal de Información -->
     <div class="card">
-        <h2 id="muscle-title">Selecciona una Zona</h2>
-        <p id="muscle-desc">Toca en uno de los botones superiores para explorar los músculos y su aplicación estética.</p>
-        
-        <div id="buttons-container" style="margin-top: 15px;"></div>
+        <div id="muscle-buttons" class="muscle-selector">
+            <span style="color: var(--text-sub); font-size: 12px;">Selecciona una región arriba</span>
+        </div>
+
+        <div class="info-box">
+            <h2 id="m-nombre">¡Bienvenida!</h2>
+            
+            <div id="m-contenido">
+                <p style="color: var(--text-sub); font-size: 13px;">
+                    Haz clic en una región anatómica y elige un músculo para revisar su función clínica, ubicación y relevancia en tratamientos estéticos.
+                </p>
+            </div>
+        </div>
     </div>
 
     <script>
-        const datos = {
+        const baseDatos = {
             cara: [
                 {
+                    nombre: "Frontal",
+                    accion: "Eleva las cejas y arruga la frente transversalmente.",
+                    ubicacion: "Región anterior del cráneo, zona frontal.",
+                    estetica: "Líneas de expresión horizontales. Zona clave para toxina botulínica y masajes tensores faciales."
+                },
+                {
                     nombre: "Orbicular de los Ojos",
-                    desc: "Acción: Cierra los párpados. Estética: Tratamiento de patas de gallo y drenaje linfático periocular."
+                    accion: "Cierra los párpados y ayuda al parpadeo.",
+                    ubicacion: "Alrededor de las órbitas oculares.",
+                    estetica: "Formación de 'patas de gallo'. Tratamiento con drenaje linfático periocular y aparatología suave."
                 },
                 {
                     nombre: "Corrugador del Supercilio",
-                    desc: "Acción: Arruga el ceño. Estética: Zona principal para aplicación de toxina botulínica."
+                    accion: "Atrae la ceja hacia adentro y abajo (arruga el ceño).",
+                    ubicacion: "Sobre el arco superciliar, profundo al frontal.",
+                    estetica: "Líneas del entrecejo. Tratamiento habitual con relajantes musculares (Botox)."
+                },
+                {
+                    nombre: "Cigomático Mayor",
+                    accion: "Tracciona la comisura labial hacia arriba y afuera (sonrisa).",
+                    ubicacion: "Desde el hueso cigomático hasta la comisura labial.",
+                    estetica: "Elevación de los pómulos. Masaje mdf / maderoterapia facial para definir el óvalo facial."
                 },
                 {
                     nombre: "Masetero",
-                    desc: "Acción: Masticación. Estética: Masajes de relajación para bruxismo y perfilado mandibular."
+                    accion: "Potente elevador de la mandíbula (masticación).",
+                    ubicacion: "Lateral de la mandíbula.",
+                    estetica: "Bruxismo e hipertrofia mandibular. Masajes descontracturantes faciales y perfilado."
                 }
             ],
-            abdomen: [
+            cuello: [
                 {
-                    nombre: "Recto Abdominal",
-                    desc: "Acción: Flexión del tronco. Estética: Tonificación con electroestimulación (ondas rusas)."
+                    nombre: "Platisma",
+                    accion: "Tensa la piel del cuello y desplaza hacia abajo la comisura labial.",
+                    ubicacion: "Músculo subcutáneo ancho en la zona anterior del cuello.",
+                    estetica: "Bandas platismales, flacidez del cuello ('cuello de pavo'). Relevante en radiofrecuencia corporal/facial."
                 },
                 {
-                    nombre: "Transverso del Abdomen",
-                    desc: "Acción: Comprime el abdomen (faja natural). Estética: Gimnasia hipopresiva y firmeza."
+                    nombre: "Esternocleidomastoideo (ECOM)",
+                    accion: "Rotación e inclinación de la cabeza; flexión cervical.",
+                    ubicacion: "Zona anterolateral del cuello.",
+                    estetica: "Zona de paso para drenaje linfático manual (cuello) y masajes descontracturantes de cuello y trapecio."
+                }
+            ],
+            torso: [
+                {
+                    nombre: "Recto Abdominal",
+                    accion: "Flexión del tronco y compresión de vísceras.",
+                    ubicacion: "Pared anterior del abdomen a lo largo de la línea media.",
+                    estetica: "Definición abdominal. Tratamiento con electroestimulación (ondas rusas/cuadradas) y diástasis abdominal."
+                },
+                {
+                    nombre: "Oblicuo Externo",
+                    accion: "Flexión lateral y rotación del tronco.",
+                    ubicacion: "Pared anterolateral del abdomen.",
+                    estetica: "Moldeo de la cintura. Trabajo con maderoterapia, masajes reductores y cavitación."
+                },
+                {
+                    nombre: "Pectoral Mayor",
+                    accion: "Aducción y rotación interna del brazo.",
+                    ubicacion: "Parte anterior y superior del tórax.",
+                    estetica: "Reafirmación del busto y postura del escote."
+                }
+            ],
+            espalda: [
+                {
+                    nombre: "Trapecio",
+                    accion: "Eleva, retrae y rota la escápula. Extensión de cabeza.",
+                    ubicacion: "Zona posterior del cuello y parte superior de la espalda.",
+                    estetica: "Alivio de tensiones posturales, masajes relajantes e impacto en la postura del cuello y hombros."
+                },
+                {
+                    nombre: "Dorsal Ancho",
+                    accion: "Extensión, aducción y rotación interna del brazo.",
+                    ubicacion: "Parte inferior y media de la espalda.",
+                    estetica: "Moldeo de la silueta posterior ('espalda en V') y masajes descontracturantes."
+                }
+            ],
+            extremidades: [
+                {
+                    nombre: "Glúteo Mayor",
+                    accion: "Extensión y rotación lateral de la cadera.",
+                    ubicacion: "Región glútea posterior.",
+                    estetica: "Levantamiento y tonificación de glúteos. Protocolos con copas de succión, electroestimulación y ejercicios."
+                },
+                {
+                    nombre: "Cuádriceps Femoral",
+                    accion: "Extensión de la rodilla y flexión de cadera.",
+                    ubicacion: "Parte anterior del muslo.",
+                    estetica: "Firmeza en muslos, tratamiento de flacidez muscular y mejora del retorno venoso/linfático."
                 }
             ]
         };
 
-        function cargarZona(zona) {
-            const container = document.getElementById('buttons-container');
-            container.innerHTML = '';
-            
-            datos[zona].forEach((m, index) => {
+        function seleccionarZona(zona, elemento) {
+            // Actualizar clase activa en botones de zona
+            document.querySelectorAll('.btn-zone').forEach(btn => btn.classList.remove('active'));
+            if(elemento) elemento.classList.add('active');
+
+            const contenedor = document.getElementById('muscle-buttons');
+            contenedor.innerHTML = '';
+
+            const musculos = baseDatos[zona];
+
+            musculos.forEach((m, idx) => {
                 const btn = document.createElement('button');
-                btn.className = 'muscle-btn';
+                btn.className = 'btn-muscle';
                 btn.innerText = m.nombre;
-                btn.onclick = function() {
-                    document.getElementById('muscle-title').innerText = m.nombre;
-                    document.getElementById('muscle-desc').innerText = m.desc;
-                };
-                container.appendChild(btn);
-                
-                if(index === 0) {
-                    btn.click();
-                }
+                btn.onclick = () => mostrarDetalle(m, btn);
+                contenedor.appendChild(btn);
+
+                // Cargar el primero automáticamente
+                if(idx === 0) btn.click();
             });
         }
+
+        function mostrarDetalle(m, btnElemento) {
+            document.querySelectorAll('.btn-muscle').forEach(b => b.classList.remove('active'));
+            if(btnElemento) btnElemento.classList.add('active');
+
+            document.getElementById('m-nombre').innerText = m.nombre;
+            document.getElementById('m-contenido').innerHTML = `
+                <div class="info-item">
+                    <span class="info-label">📍 Ubicación:</span>
+                    ${m.ubicacion}
+                </div>
+                <div class="info-item">
+                    <span class="info-label">⚙️ Acción Anatómica:</span>
+                    ${m.accion}
+                </div>
+                <div class="badge-estetica">
+                    <strong>✨ Relevancia en Estética / Cosmiatría:</strong><br>
+                    ${m.estetica}
+                </div>
+            `;
+        }
+
+        // Cargar zona facial al inicio
+        document.addEventListener('DOMContentLoaded', () => {
+            const primerBoton = document.querySelector('.btn-zone');
+            if(primerBoton) primerBoton.click();
+        });
     </script>
 </body>
 </html>
